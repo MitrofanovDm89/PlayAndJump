@@ -9,8 +9,8 @@ def catalog_index(request):
     return render(request, 'catalog/index.html')
 
 
-def huepfburg(request):
-    return render(request, 'catalog/huepfburg.html')
+def huepfburgen(request):
+    return render(request, 'catalog/huepfburgen.html')
 
 
 def gesellschaftsspiele(request):
