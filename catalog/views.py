@@ -6,7 +6,25 @@ import json
 
 
 def catalog_index(request):
-    return render(request, 'catalog/index.html')
+    base_categories = [
+        {'slug': 'huepfburgen', 'name': 'H\u00fcpfburgen', 'url_name': 'huepfburgen'},
+        {'slug': 'gesellschaftsspiele', 'name': 'Gesellschaftsspiele', 'url_name': 'gesellschaftsspiele'},
+        {'slug': 'funfood', 'name': 'Fun Food', 'url_name': 'funfood'},
+    ]
+
+    existing = {c.slug: c for c in Category.objects.filter(slug__in=[b['slug'] for b in base_categories])}
+    categories = []
+    for item in base_categories:
+        cat = existing.get(item['slug'])
+        name = cat.name if cat else item['name']
+        if cat and cat.image:
+            image_url = cat.image.url
+        else:
+            placeholder_text = name.replace(' ', '+')
+            image_url = f'https://via.placeholder.com/400x250?text={placeholder_text}'
+        categories.append({'name': name, 'image_url': image_url, 'url_name': item['url_name']})
+
+    return render(request, 'catalog/index.html', {'categories': categories})
 
 
 def huepfburgen(request):
