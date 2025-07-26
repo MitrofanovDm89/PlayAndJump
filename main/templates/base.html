@@ -10,6 +10,16 @@
     
     <!-- Стили сайта -->
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    
+    <!-- Дополнительные стили для переопределения -->
+    <style>
+      .navbar-logo {
+        height: 48px !important;
+        max-width: 192px !important;
+        object-fit: contain !important;
+        width: auto !important;
+      }
+    </style>
 
     <!-- Flatpickr стили и скрипт -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
