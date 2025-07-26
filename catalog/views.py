@@ -6,8 +6,19 @@ import json
 
 
 def catalog_index(request):
-    categories = Category.objects.all()
-    return render(request, 'catalog/index.html', {'categories': categories})
+    return render(request, 'catalog/index.html')
+
+
+def huepfburg(request):
+    return render(request, 'catalog/huepfburg.html')
+
+
+def gesellschaftsspiele(request):
+    return render(request, 'catalog/gesellschaftsspiele.html')
+
+
+def funfood(request):
+    return render(request, 'catalog/funfood.html')
 
 
 def category_detail(request, slug):
