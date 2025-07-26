@@ -119,6 +119,38 @@
     </div>
   </div>
   
+        <!-- Google Map Section -->
+      <div class="map-section animate-on-scroll mb-12">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-3xl font-bold mb-8 text-blue-600 text-center">Unser Standort</h2>
+          <div class="map-container">
+            <div class="relative">
+              <div class="w-full h-96 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg shadow-lg flex items-center justify-center">
+                <div class="text-center">
+                  <div class="text-6xl mb-4">📍</div>
+                  <h3 class="text-2xl font-bold text-gray-800 mb-2">Play & Jump</h3>
+                  <p class="text-gray-600 mb-4">Ludwig Jahn 2, 77815 Bühl</p>
+                  <a href="https://maps.google.com/?q=Ludwig+Jahn+2,+77815+Bühl,Deutschland" 
+                     target="_blank" 
+                     rel="noopener noreferrer"
+                     class="bg-white bg-opacity-90 px-6 py-3 rounded-lg shadow-lg hover:bg-opacity-100 transition-all duration-300 transform hover:scale-105 inline-block">
+                    <span class="text-blue-600 font-semibold">📍 In Google Maps öffnen</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-6">
+            <p class="text-gray-600 text-lg">
+              <strong>Adresse:</strong> Ludwig Jahn 2, 77815 Bühl, Deutschland
+            </p>
+            <p class="text-gray-600 mt-2">
+              <strong>Telefon:</strong> 0159 06787102
+            </p>
+          </div>
+        </div>
+      </div>
+  
   <!-- Opening Hours -->
   <div class="opening-hours-card animate-on-scroll">
     <div class="bg-white rounded-xl shadow-lg p-8">
@@ -230,11 +262,11 @@
   }
   
   /* Contact cards */
-  .contact-info-card, .contact-form-card, .opening-hours-card {
+  .contact-info-card, .contact-form-card, .opening-hours-card, .map-section {
     transition: all 0.3s ease;
   }
   
-  .contact-info-card:hover, .contact-form-card:hover, .opening-hours-card:hover {
+  .contact-info-card:hover, .contact-form-card:hover, .opening-hours-card:hover, .map-section:hover {
     transform: translateY(-4px);
   }
   
@@ -290,6 +322,22 @@
   
   .submit-btn:hover::before {
     left: 100%;
+  }
+  
+  /* Map styling */
+  .map-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .map-container iframe {
+    transition: all 0.3s ease;
+  }
+  
+  .map-container:hover iframe {
+    transform: scale(1.02);
   }
   
   /* Scroll animations */
