@@ -25,12 +25,7 @@ def ueber_uns(request):
 
 def vermietung(request):
     """Страница аренды оборудования"""
-    # Get all active products for display
-    products = Product.objects.filter(is_active=True).order_by('category__name', 'title')
-    
-    return render(request, 'main/vermietung.html', {
-        'products': products
-    })
+    return render(request, 'main/vermietung.html')
 
 def neuigkeiten(request):
     """Страница новостей"""
