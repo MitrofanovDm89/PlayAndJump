@@ -6,25 +6,29 @@
 {% block content %}
 <h1 class="text-3xl font-bold mb-8 text-center">Unser Katalog</h1>
 
-{% if categories %}
-  <div class="grid gap-8 md:grid-cols-3">
-    {% for category in categories %}
-      <div class="bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition">
-        <a href="{% url 'category_detail' slug=category.slug %}">
-          {% if category.image %}
-            <img class="w-full h-48 object-cover" src="{{ category.image.url }}" alt="{{ category.name }}">
-          {% endif %}
-          <div class="p-4 text-center">
-            <h2 class="text-xl font-semibold mb-2">{{ category.name }}</h2>
-            {% if category.description %}
-              <p class="text-gray-600">{{ category.description }}</p>
-            {% endif %}
-          </div>
-        </a>
-      </div>
-    {% endfor %}
+<div class="flex flex-wrap justify-center gap-8">
+  <div class="w-72 bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+    <img class="w-full h-48 object-cover" src="https://via.placeholder.com/400x250?text=H%C3%BCpfburg" alt="Hüpfburg">
+    <div class="p-4 text-center">
+      <h2 class="text-xl font-semibold mb-2">Hüpfburg</h2>
+      <a href="{% url 'huepfburg' %}" class="inline-block mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mehr erfahren</a>
+    </div>
   </div>
-{% else %}
-  <p>Keine Kategorien verfügbar.</p>
-{% endif %}
+
+  <div class="w-72 bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+    <img class="w-full h-48 object-cover" src="https://via.placeholder.com/400x250?text=Gesellschaftsspiele" alt="Gesellschaftsspiele">
+    <div class="p-4 text-center">
+      <h2 class="text-xl font-semibold mb-2">Gesellschaftsspiele</h2>
+      <a href="{% url 'gesellschaftsspiele' %}" class="inline-block mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mehr erfahren</a>
+    </div>
+  </div>
+
+  <div class="w-72 bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+    <img class="w-full h-48 object-cover" src="https://via.placeholder.com/400x250?text=FunFood" alt="FunFood">
+    <div class="p-4 text-center">
+      <h2 class="text-xl font-semibold mb-2">FunFood</h2>
+      <a href="{% url 'funfood' %}" class="inline-block mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Mehr erfahren</a>
+    </div>
+  </div>
+</div>
 {% endblock %}
