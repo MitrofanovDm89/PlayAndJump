@@ -1,6 +1,6 @@
-from datetime import timedelta
+from datetime import timedelta, date
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Category, Availability
+from .models import Product, Category, Availability, Booking
 from cart.forms import CartAddProductForm
 import json
 
@@ -23,23 +23,36 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, is_active=True)
     form = CartAddProductForm()
 
-    # Получаем все недоступные диапазоны дат
-    unavail_ranges = Availability.objects.filter(
+    # Get related products from same category
+    related_products = Product.objects.filter(
+        category=product.category, 
+        is_active=True
+    ).exclude(id=product.id)[:4]
+
+    # Get booked dates for the next 3 months
+    today = date.today()
+    end_date = today + timedelta(days=90)
+    
+    # Get confirmed and pending bookings
+    bookings = Booking.objects.filter(
         product=product,
-        is_available=False
-    )
+        start_date__gte=today,
+        end_date__lte=end_date,
+        status__in=['confirmed', 'pending']
+    ).order_by('start_date')
+    
+    # Create list of booked dates for JavaScript
+    booked_dates = []
+    for booking in bookings:
+        current_date = booking.start_date
+        while current_date <= booking.end_date:
+            booked_dates.append(current_date.strftime('%Y-%m-%d'))
+            current_date += timedelta(days=1)
 
-    # Собираем все отдельные недоступные даты
-    unavailable_dates = []
-    for entry in unavail_ranges:
-        current = entry.start_date
-        while current <= entry.end_date:
-            unavailable_dates.append(current.strftime('%Y-%m-%d'))
-            current += timedelta(days=1)
-
-    return render(request, 'catalog/product_detail.html', {
+    return render(request, 'main/product_detail.html', {
         'product': product,
-        'form': form,
-        'unavailable_dates': json.dumps(unavailable_dates),  # мини-календарь
-        'disabled_dates': json.dumps(unavailable_dates),     # flatpickr
+        'related_products': related_products,
+        'booked_dates': json.dumps(booked_dates),
+        'bookings': bookings,
+        'form': form
     })
