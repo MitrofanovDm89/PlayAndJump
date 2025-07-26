@@ -41,7 +41,7 @@
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {% for product in featured %}
-      <div class="product-card animate-on-scroll" data-delay="{{ forloop.counter0|multiply:200 }}">
+      <div class="product-card animate-on-scroll" data-delay="{{ forloop.counter0|add:0 }}">
         <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
           <a href="{% url 'product_detail' slug=product.slug %}">
             {% if product.image %}
