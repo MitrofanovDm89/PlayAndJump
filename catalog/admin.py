@@ -3,6 +3,7 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.db.models import Sum, Count
+from django.contrib.admin import AdminSite
 from .models import Product, Category, Availability, Booking
 
 
@@ -118,15 +119,13 @@ class AvailabilityAdmin(admin.ModelAdmin):
 
 
 # Кастомная админка для дашборда
-class PlayAndJumpAdminSite(admin.AdminSite):
-    site_header = "Play & Jump - Администрирование"
+class PlayAndJumpAdminSite(AdminSite):
+    site_header = "🎪 Play & Jump - Администрирование"
     site_title = "Play & Jump Admin"
     index_title = "Панель управления"
     
-    def get_app_list(self, request):
-        app_list = super().get_app_list(request)
-        
-        # Добавляем статистику
+    def index(self, request, extra_context=None):
+        # Получаем статистику
         stats = {
             'total_products': Product.objects.count(),
             'active_products': Product.objects.filter(is_active=True).count(),
@@ -136,10 +135,16 @@ class PlayAndJumpAdminSite(admin.AdminSite):
             'total_revenue': Booking.objects.filter(status='confirmed').aggregate(Sum('total_price'))['total_price__sum'] or 0,
         }
         
-        # Добавляем статистику в контекст
-        self.stats = stats
+        # Получаем последние бронирования
+        recent_bookings = Booking.objects.select_related('product').order_by('-created_at')[:5]
         
-        return app_list
+        extra_context = extra_context or {}
+        extra_context.update({
+            'stats': stats,
+            'recent_bookings': recent_bookings,
+        })
+        
+        return super().index(request, extra_context)
 
 
 # Регистрируем кастомную админку
