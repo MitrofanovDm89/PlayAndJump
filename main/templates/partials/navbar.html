@@ -1,5 +1,12 @@
-<nav class="space-x-4">
+<nav class="space-x-4 relative">
+  <div class="group inline-block relative">
     <a class="hover:text-cyan-200" href="/katalog/">Katalog</a>
-    <a class="hover:text-cyan-200" href="/ueber-uns/">Über uns</a>
-    <a class="hover:text-cyan-200" href="/kontakt/">Kontakt</a>
+    <div class="hidden group-hover:block absolute bg-gray-800 text-white mt-1 py-2 rounded shadow-lg">
+      <a href="/katalog/huepfburgen/" class="block px-4 py-1 whitespace-nowrap hover:bg-gray-700">Hüpfburgen</a>
+      <a href="/katalog/gesellschaftsspiele/" class="block px-4 py-1 whitespace-nowrap hover:bg-gray-700">Gesellschaftsspiele</a>
+      <a href="/katalog/funfood/" class="block px-4 py-1 whitespace-nowrap hover:bg-gray-700">FunFood</a>
+    </div>
+  </div>
+  <a class="hover:text-cyan-200" href="/ueber-uns/">Über uns</a>
+  <a class="hover:text-cyan-200" href="/kontakt/">Kontakt</a>
 </nav>

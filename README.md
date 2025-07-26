@@ -64,3 +64,13 @@ python manage.py import_wp path/to/export.xml
 
 Each `<item>` with type `page` will be converted into a `Page` model instance. Existing pages with the same slug are updated.
 
+
+### Importing products
+
+Products from the WordPress export can be loaded with the `import_wp_products` command:
+
+```bash
+python manage.py import_wp_products Backup/playampjump.WordPress.2025-07-24.xml
+```
+
+This will create the default categories and populate the catalog with items using images from `Backup/used_images`.
