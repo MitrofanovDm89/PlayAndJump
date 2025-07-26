@@ -28,12 +28,12 @@
         margin-bottom: 30px;
     }
     
-    .logo h1 {
-        color: #4f46e5;
-        font-size: 28px;
-        font-weight: 700;
-        margin: 0;
-        margin-bottom: 8px;
+    .logo img {
+        height: 60px;
+        width: auto;
+        max-width: 200px;
+        object-fit: contain;
+        margin-bottom: 10px;
     }
     
     .logo p {
@@ -179,7 +179,7 @@
 {% block content %}
 <div class="login-container">
     <div class="logo">
-        <h1>🎪 Play & Jump</h1>
+        <img src="{% static 'main/img/jumpplay-1.0-1.png' %}" alt="Play & Jump Logo">
         <p>Панель администратора</p>
     </div>
     

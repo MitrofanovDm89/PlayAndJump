@@ -42,11 +42,25 @@
         font-size: 1.5rem;
         font-weight: 700;
         margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
     
     #header h1 a {
         color: white;
         text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    #header h1 img {
+        height: 40px;
+        width: auto;
+        max-width: 160px;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
     }
     
     #branding h1 a:hover {
@@ -288,6 +302,11 @@
             padding: 1rem;
         }
         
+        #header h1 img {
+            height: 32px;
+            max-width: 120px;
+        }
+        
         #content {
             margin: 0.5rem;
         }
@@ -306,7 +325,8 @@
 {% block branding %}
 <h1 id="site-name">
     <a href="{% url 'admin:index' %}">
-        🎪 Play & Jump - Администрирование
+        <img src="{% static 'main/img/jumpplay-1.0-1.png' %}" alt="Play & Jump Logo">
+        <span>Администрирование</span>
     </a>
 </h1>
 {% endblock %}
