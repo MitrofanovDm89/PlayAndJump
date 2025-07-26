@@ -52,7 +52,7 @@ class Command(BaseCommand):
                 'description': 'Klassische Hüpfburg für alle Altersgruppen. Sicher und stabil.',
                 'price': 120.00,
                 'category': 'huepfburgen',
-                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder image
+                'image_file': 'hupfburg-zirkus-super-1-940x652-1.jpg'
             },
             {
                 'title': 'Hüpfburg Zirkus',
@@ -76,7 +76,7 @@ class Command(BaseCommand):
                 'description': 'Elegante weiße Hüpfburg für besondere Anlässe. Neutrales Design.',
                 'price': 110.00,
                 'category': 'huepfburgen',
-                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+                'image_file': 'hupfburg-zirkus-super-3.jpg'
             },
             {
                 'title': 'Hüpfburg Polizei',
@@ -92,7 +92,7 @@ class Command(BaseCommand):
                 'description': 'Meeresthema Hüpfburg mit Delphin-Design. Perfekt für Sommerfeste.',
                 'price': 125.00,
                 'category': 'huepfburgen',
-                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+                'image_file': 'zirkus.jpg'
             },
             {
                 'title': 'Hüpfburg Madagaskar',
@@ -100,7 +100,7 @@ class Command(BaseCommand):
                 'description': 'Exotische Madagaskar-Hüpfburg mit wilden Tieren. Einzigartiges Design.',
                 'price': 140.00,
                 'category': 'huepfburgen',
-                'image_file': 'Dschungel-1.jpg'  # Placeholder
+                'image_file': 'Dschungel-Hüpfburgjpg-1024x766-1.jpg'
             },
             {
                 'title': 'Hüpfburg Party',
@@ -108,7 +108,7 @@ class Command(BaseCommand):
                 'description': 'Bunte Party-Hüpfburg mit Konfetti-Design. Ideal für Feiern.',
                 'price': 135.00,
                 'category': 'huepfburgen',
-                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+                'image_file': 'Party-1.jpg'
             },
             {
                 'title': 'Riesen Rutsche',
@@ -116,7 +116,7 @@ class Command(BaseCommand):
                 'description': 'Große Rutsche für Events. Sicher und unterhaltsam für alle Altersgruppen.',
                 'price': 80.00,
                 'category': 'huepfburgen',
-                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+                'image_file': 'zirkus-1024x768.jpg'
             },
             {
                 'title': 'Hüpfburg Maxi',
@@ -124,7 +124,7 @@ class Command(BaseCommand):
                 'description': 'Extra große Hüpfburg für viele Kinder. Maximale Kapazität.',
                 'price': 180.00,
                 'category': 'huepfburgen',
-                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+                'image_file': 'Maxi-Hüpfburg1-1024x766-1.jpg'
             },
             {
                 'title': 'Hüpfburg Shooting Combo',
@@ -132,7 +132,7 @@ class Command(BaseCommand):
                 'description': 'Hüpfburg mit integriertem Schießstand. Doppelter Spaß.',
                 'price': 160.00,
                 'category': 'huepfburgen',
-                'image_file': 'Shooting-Combo.jpg'  # Placeholder
+                'image_file': 'Shooting-Combo.jpg'
             },
             
             # Gesellschaftsspiele Category
@@ -142,7 +142,7 @@ class Command(BaseCommand):
                 'description': 'Fußballtor mit Geschwindigkeitsmessung. Professionelle Ausrüstung.',
                 'price': 90.00,
                 'category': 'gesellschaftsspiele',
-                'image_file': 'Fussball-Billiard-1.jpeg'  # Placeholder
+                'image_file': 'Fussball-Billiard-Rastatt-scaled.jpg'
             },
             {
                 'title': 'Fußball-Billiard',
@@ -174,7 +174,7 @@ class Command(BaseCommand):
                 'description': 'Traditionelles Stockfangen-Spiel. Spaß für die ganze Familie.',
                 'price': 60.00,
                 'category': 'gesellschaftsspiele',
-                'image_file': 'XXL-Schach-Play-Jump-1-scaled.jpg'  # Placeholder
+                'image_file': 'kregle.jpg'
             },
             {
                 'title': 'Kickertisch',
@@ -182,7 +182,7 @@ class Command(BaseCommand):
                 'description': 'Professioneller Kickertisch für Events. Hochwertige Ausführung.',
                 'price': 100.00,
                 'category': 'gesellschaftsspiele',
-                'image_file': 'Fussball-Billiard-1.jpeg'  # Placeholder
+                'image_file': 'Fussball-Billiard1.jpeg'
             },
             {
                 'title': '4 gewinnt XXL',
@@ -190,7 +190,7 @@ class Command(BaseCommand):
                 'description': 'Riesiges 4 gewinnt Spiel für draußen. Strategisches Denken.',
                 'price': 75.00,
                 'category': 'gesellschaftsspiele',
-                'image_file': 'XXL-Schach-Play-Jump-1-scaled.jpg'  # Placeholder
+                'image_file': 'XXL-Schach-Play-Jump.jpg'
             },
             {
                 'title': 'Bull Rodeo',
@@ -198,7 +198,7 @@ class Command(BaseCommand):
                 'description': 'Spannendes Bull Rodeo Spiel. Action und Spaß für alle.',
                 'price': 85.00,
                 'category': 'gesellschaftsspiele',
-                'image_file': 'Shooting-Combo.jpg'  # Placeholder
+                'image_file': 'Shooting-Combo2.jpg'
             },
             
             # Fun Food Category
