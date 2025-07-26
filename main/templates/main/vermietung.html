@@ -5,19 +5,31 @@
 
 {% block content %}
 <!-- Hero Section -->
-<div class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h1 class="text-5xl md:text-7xl font-bold mb-6">Vermietung</h1>
-    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+<div class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20 relative overflow-hidden">
+  <!-- Animated background elements -->
+  <div class="absolute inset-0">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">Vermietung</h1>
+    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in-up-delay">
       Mieten Sie eines von unseren Modulen für Ihr Event, für Ihre Kindern, für Ihren Spaß. 
       Mit unserer einmaligen Event Betreuung können auch die Eltern bedenkenlos mitfeiern.
     </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="/katalog/" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-        Katalog ansehen
+    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up-delay-2">
+      <a href="/katalog/" class="cta-button primary-btn">
+        <span class="btn-content">Katalog ansehen</span>
+        <span class="btn-icon">→</span>
       </a>
-      <a href="/kontakt/" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-        Jetzt anfragen
+      <a href="/kontakt/" class="cta-button secondary-btn">
+        <span class="btn-content">Jetzt anfragen</span>
+        <span class="btn-icon">→</span>
       </a>
     </div>
   </div>
@@ -26,18 +38,18 @@
 <!-- Additional Services Section -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
   <div class="text-center mb-12">
-    <h2 class="text-4xl font-bold text-gray-900 mb-4">Zusätzliche Dienstleistungen</h2>
-    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+    <h2 class="text-4xl font-bold text-gray-900 mb-4 animate-on-scroll">Zusätzliche Dienstleistungen</h2>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-on-scroll-delay">
       Erweitern Sie Ihr Event mit unseren zusätzlichen Services und Geräten
     </p>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <!-- RIESEN RUTSCHE -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/rutsche.jpg' %}" alt="RIESEN RUTSCHE" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/rutsche.jpg' %}" alt="RIESEN RUTSCHE" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           Auf Anfrage
         </div>
       </div>
@@ -45,10 +57,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">RIESEN RUTSCHE</h3>
         <p class="text-gray-600 text-sm mb-4">Große Rutsche für noch mehr Spaß bei Ihren Events. Perfekt für Kindergeburtstage und Familienfeste.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-blue-600 hover:text-blue-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-blue-600 hover:text-blue-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Anfrage senden →
           </a>
-          <a href="/kontakt/" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition duration-200">
+          <a href="/kontakt/" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition duration-200 hover:scale-105 transform">
             Jetzt mieten
           </a>
         </div>
@@ -56,10 +68,10 @@
     </div>
 
     <!-- Event Betreuung -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/event-betreuung.jpg' %}" alt="Event Betreuung" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/event-betreuung.jpg' %}" alt="Event Betreuung" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           Auf Anfrage
         </div>
       </div>
@@ -67,10 +79,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Event Betreuung</h3>
         <p class="text-gray-600 text-sm mb-4">Professionelle Betreuung während Ihrer Veranstaltung. Geschultes Personal sorgt für Sicherheit und Spaß.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-green-600 hover:text-green-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-green-600 hover:text-green-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Details erfahren →
           </a>
-          <a href="/kontakt/" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition duration-200">
+          <a href="/kontakt/" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition duration-200 hover:scale-105 transform">
             Jetzt buchen
           </a>
         </div>
@@ -78,10 +90,10 @@
     </div>
 
     <!-- Stromerzeuger -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/stromerzeuger.jpg' %}" alt="Stromerzeuger" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/stromerzeuger.jpg' %}" alt="Stromerzeuger" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-orange-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           30€ + Benzin
         </div>
       </div>
@@ -89,10 +101,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Stromerzeuger</h3>
         <p class="text-gray-600 text-sm mb-4">Professioneller Stromerzeuger für Events ohne Stromanschluss. Inklusive Benzin und Bedienung.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-orange-600 hover:text-orange-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-orange-600 hover:text-orange-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Mehr erfahren →
           </a>
-          <a href="/kontakt/" class="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-700 transition duration-200">
+          <a href="/kontakt/" class="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-orange-700 transition duration-200 hover:scale-105 transform">
             Jetzt mieten
           </a>
         </div>
@@ -100,10 +112,10 @@
     </div>
 
     <!-- Gebläse Schalldämmung -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/schalldaemmung.jpg' %}" alt="Gebläse Schalldämmung" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/schalldaemmung.jpg' %}" alt="Gebläse Schalldämmung" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           25€ / Tag
         </div>
       </div>
@@ -111,10 +123,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Gebläse Schalldämmung</h3>
         <p class="text-gray-600 text-sm mb-4">Reduzieren Sie die Geräusche der Gebläse für ruhigere Events in Wohngebieten.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-purple-600 hover:text-purple-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-purple-600 hover:text-purple-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Details →
           </a>
-          <a href="/kontakt/" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition duration-200">
+          <a href="/kontakt/" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition duration-200 hover:scale-105 transform">
             Jetzt mieten
           </a>
         </div>
@@ -122,10 +134,10 @@
     </div>
 
     <!-- Zuckerwattemaschine -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/zuckerwatte.jpg' %}" alt="Zuckerwattemaschine" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/zuckerwatte.jpg' %}" alt="Zuckerwattemaschine" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           79€ / Tag
         </div>
       </div>
@@ -133,10 +145,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Zuckerwattemaschine</h3>
         <p class="text-gray-600 text-sm mb-4">Professionelle Zuckerwattemaschine für süße Überraschungen bei Ihren Events.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-pink-600 hover:text-pink-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-pink-600 hover:text-pink-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Mehr erfahren →
           </a>
-          <a href="/kontakt/" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-pink-700 transition duration-200">
+          <a href="/kontakt/" class="bg-pink-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-pink-700 transition duration-200 hover:scale-105 transform">
             Jetzt mieten
           </a>
         </div>
@@ -144,10 +156,10 @@
     </div>
 
     <!-- Kinderschminken -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/kinderschminken.jpg' %}" alt="Kinderschminken" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/kinderschminken.jpg' %}" alt="Kinderschminken" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           Auf Anfrage
         </div>
       </div>
@@ -155,10 +167,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Kinderschminken</h3>
         <p class="text-gray-600 text-sm mb-4">Professionelles Kinderschminken mit verschiedenen Motiven. Perfekt für Kindergeburtstage.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-yellow-600 hover:text-yellow-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-yellow-600 hover:text-yellow-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Motive ansehen →
           </a>
-          <a href="/kontakt/" class="bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-yellow-700 transition duration-200">
+          <a href="/kontakt/" class="bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-yellow-700 transition duration-200 hover:scale-105 transform">
             Jetzt buchen
           </a>
         </div>
@@ -166,10 +178,10 @@
     </div>
 
     <!-- Hüpfburg Delphin -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/delphin.jpg' %}" alt="Hüpfburg Delphin" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/delphin.jpg' %}" alt="Hüpfburg Delphin" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           150€ / Tag
         </div>
       </div>
@@ -177,10 +189,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Hüpfburg Delphin</h3>
         <p class="text-gray-600 text-sm mb-4">Schöne und stabile Hüpfburg für Mädchen und Jungen. Sehr gemütliche Drucke auf der Seite.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-blue-600 hover:text-blue-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-blue-600 hover:text-blue-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Details ansehen →
           </a>
-          <a href="/kontakt/" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition duration-200">
+          <a href="/kontakt/" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition duration-200 hover:scale-105 transform">
             Jetzt mieten
           </a>
         </div>
@@ -188,10 +200,10 @@
     </div>
 
     <!-- Hüpfburg weiß -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/huepfburg-weiss.jpg' %}" alt="Hüpfburg weiß" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/huepfburg-weiss.jpg' %}" alt="Hüpfburg weiß" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-gray-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           Auf Anfrage
         </div>
       </div>
@@ -199,10 +211,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Hüpfburg weiß</h3>
         <p class="text-gray-600 text-sm mb-4">Elegante weiße Hüpfburg für besondere Anlässe. Neutrales Design für alle Events.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-gray-600 hover:text-gray-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-gray-600 hover:text-gray-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Details ansehen →
           </a>
-          <a href="/kontakt/" class="bg-gray-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-700 transition duration-200">
+          <a href="/kontakt/" class="bg-gray-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-700 transition duration-200 hover:scale-105 transform">
             Jetzt mieten
           </a>
         </div>
@@ -210,10 +222,10 @@
     </div>
 
     <!-- Fußball Darts -->
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-      <div class="relative">
-        <img src="{% static 'main/img/fussball-darts.jpg' %}" alt="Fußball Darts" class="w-full h-48 object-cover">
-        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+    <div class="service-card animate-on-scroll">
+      <div class="relative overflow-hidden">
+        <img src="{% static 'main/img/fussball-darts.jpg' %}" alt="Fußball Darts" class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold animate-pulse">
           99€ / Tag
         </div>
       </div>
@@ -221,10 +233,10 @@
         <h3 class="text-xl font-semibold text-gray-900 mb-2">Fußball Darts</h3>
         <p class="text-gray-600 text-sm mb-4">Jeder kann schießen, aber wer trifft die Mitte? Spannendes Spiel für alle Altersgruppen.</p>
         <div class="flex justify-between items-center">
-          <a href="/kontakt/" class="text-green-600 hover:text-green-800 font-semibold text-sm">
+          <a href="/kontakt/" class="text-green-600 hover:text-green-800 font-semibold text-sm hover:translate-x-1 transition-transform duration-200">
             Details ansehen →
           </a>
-          <a href="/kontakt/" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition duration-200">
+          <a href="/kontakt/" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition duration-200 hover:scale-105 transform">
             Jetzt mieten
           </a>
         </div>
@@ -233,41 +245,52 @@
   </div>
 </div>
 
-<!-- Service Features -->
-<section class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Service Features with Motion Design -->
+<section class="py-16 bg-gray-50 relative overflow-hidden">
+  <!-- Animated background -->
+  <div class="absolute inset-0">
+    <div class="moving-dots">
+      <div class="dot dot-1"></div>
+      <div class="dot dot-2"></div>
+      <div class="dot dot-3"></div>
+      <div class="dot dot-4"></div>
+      <div class="dot dot-5"></div>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="text-center mb-12">
-      <h2 class="text-4xl font-bold text-gray-900 mb-4">Warum Play & Jump?</h2>
-      <p class="text-xl text-gray-600">Professioneller Service für Ihre perfekte Veranstaltung</p>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4 animate-on-scroll">Warum Play & Jump?</h2>
+      <p class="text-xl text-gray-600 animate-on-scroll-delay">Professioneller Service für Ihre perfekte Veranstaltung</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="text-center">
-        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
           <span class="text-2xl">🚚</span>
         </div>
         <h3 class="text-xl font-semibold mb-2">Lieferung & Aufbau</h3>
         <p class="text-gray-600">Professioneller Auf- und Abbau inklusive</p>
       </div>
 
-      <div class="text-center">
-        <div class="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
           <span class="text-2xl">🛡️</span>
         </div>
         <h3 class="text-xl font-semibold mb-2">Sicherheit</h3>
         <p class="text-gray-600">Alle Geräte entsprechen höchsten Sicherheitsstandards</p>
       </div>
 
-      <div class="text-center">
-        <div class="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
           <span class="text-2xl">⚡</span>
         </div>
         <h3 class="text-xl font-semibold mb-2">Schneller Service</h3>
         <p class="text-gray-600">Lieferung im Radius von 30 km möglich</p>
       </div>
 
-      <div class="text-center">
-        <div class="bg-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div class="feature-card animate-on-scroll">
+        <div class="feature-icon bg-orange-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
           <span class="text-2xl">💰</span>
         </div>
         <h3 class="text-xl font-semibold mb-2">Faire Preise</h3>
@@ -277,66 +300,467 @@
   </div>
 </section>
 
-<!-- Pricing Info -->
+<!-- Pricing Info with Interactive Cards -->
 <section class="py-16 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <h2 class="text-4xl font-bold text-gray-900 mb-4">Preise & Service</h2>
-      <p class="text-xl text-gray-600">Transparente Preisgestaltung für alle unsere Dienstleistungen</p>
+      <h2 class="text-4xl font-bold text-gray-900 mb-4 animate-on-scroll">Preise & Service</h2>
+      <p class="text-xl text-gray-600 animate-on-scroll-delay">Transparente Preisgestaltung für alle unsere Dienstleistungen</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-blue-50 rounded-xl p-8 text-center">
-        <div class="text-4xl mb-4">🎪</div>
+      <div class="pricing-card animate-on-scroll">
+        <div class="text-4xl mb-4 animate-bounce">🎪</div>
         <h3 class="text-2xl font-bold text-blue-600 mb-4">Selbstabholung</h3>
         <p class="text-gray-600 mb-4">Sparen Sie Kosten durch Selbstabholung unserer Geräte</p>
         <ul class="text-left text-gray-600 space-y-2">
-          <li>• Günstigste Preise</li>
-          <li>• Flexible Abholzeiten</li>
-          <li>• Einfache Handhabung</li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Günstigste Preise
+          </li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Flexible Abholzeiten
+          </li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Einfache Handhabung
+          </li>
         </ul>
       </div>
 
-      <div class="bg-green-50 rounded-xl p-8 text-center">
-        <div class="text-4xl mb-4">🚚</div>
+      <div class="pricing-card animate-on-scroll">
+        <div class="text-4xl mb-4 animate-bounce">🚚</div>
         <h3 class="text-2xl font-bold text-green-600 mb-4">Lieferung & Aufbau</h3>
         <p class="text-gray-600 mb-4">Professioneller Service inklusive Auf- und Abbau</p>
         <ul class="text-left text-gray-600 space-y-2">
-          <li>• 60€ im 30km Radius</li>
-          <li>• Professioneller Aufbau</li>
-          <li>• Sicherheitscheck inklusive</li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            60€ im 30km Radius
+          </li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Professioneller Aufbau
+          </li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Sicherheitscheck inklusive
+          </li>
         </ul>
       </div>
 
-      <div class="bg-purple-50 rounded-xl p-8 text-center">
-        <div class="text-4xl mb-4">🎉</div>
+      <div class="pricing-card animate-on-scroll">
+        <div class="text-4xl mb-4 animate-bounce">🎉</div>
         <h3 class="text-2xl font-bold text-purple-600 mb-4">Event Betreuung</h3>
         <p class="text-gray-600 mb-4">Professionelle Betreuung während Ihrer Veranstaltung</p>
         <ul class="text-left text-gray-600 space-y-2">
-          <li>• Geschultes Personal</li>
-          <li>• Sicherheitsüberwachung</li>
-          <li>• Sofortige Hilfe bei Problemen</li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Geschultes Personal
+          </li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Sicherheitsüberwachung
+          </li>
+          <li class="flex items-center">
+            <span class="check-icon">✓</span>
+            Sofortige Hilfe bei Problemen
+          </li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-4xl font-bold mb-4">Bereit für Ihr perfektes Event?</h2>
-    <p class="text-xl mb-8 max-w-2xl mx-auto">
+<!-- CTA Section with Enhanced Animation -->
+<section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white relative overflow-hidden">
+  <!-- Animated background elements -->
+  <div class="absolute inset-0">
+    <div class="floating-elements">
+      <div class="floating-element element-1">🎪</div>
+      <div class="floating-element element-2">🎈</div>
+      <div class="floating-element element-3">🎉</div>
+      <div class="floating-element element-4">🎊</div>
+    </div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <h2 class="text-4xl font-bold mb-4 animate-on-scroll">Bereit für Ihr perfektes Event?</h2>
+    <p class="text-xl mb-8 max-w-2xl mx-auto animate-on-scroll-delay">
       Kontaktieren Sie uns für ein unverbindliches Angebot und lassen Sie uns gemeinsam Ihr Event unvergesslich machen!
     </p>
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="/kontakt/" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition duration-300 text-lg">
-        Jetzt anfragen
+    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-on-scroll-delay-2">
+      <a href="/kontakt/" class="cta-button primary-btn-large">
+        <span class="btn-content">Jetzt anfragen</span>
+        <span class="btn-icon">→</span>
       </a>
-      <a href="/katalog/" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300 text-lg">
-        Vollständigen Katalog ansehen
+      <a href="/katalog/" class="cta-button secondary-btn-large">
+        <span class="btn-content">Vollständigen Katalog ansehen</span>
+        <span class="btn-icon">→</span>
       </a>
     </div>
   </div>
 </section>
+
+<!-- Custom CSS for Motion Design -->
+<style>
+  /* Floating shapes animation */
+  .floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .shape-1 {
+    width: 80px;
+    height: 80px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+  
+  .shape-2 {
+    width: 120px;
+    height: 120px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 2s;
+  }
+  
+  .shape-3 {
+    width: 60px;
+    height: 60px;
+    top: 40%;
+    left: 50%;
+    animation-delay: 4s;
+  }
+  
+  .shape-4 {
+    width: 100px;
+    height: 100px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 1s;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+  
+  /* Fade in animations */
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  .animate-fade-in-up-delay {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+  
+  .animate-fade-in-up-delay-2 {
+    animation: fadeInUp 1s ease-out 0.6s both;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* CTA Button animations */
+  .cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .primary-btn {
+    background: white;
+    color: #2563eb;
+  }
+  
+  .secondary-btn {
+    border: 2px solid white;
+    color: white;
+  }
+  
+  .primary-btn-large {
+    background: white;
+    color: #2563eb;
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+  
+  .secondary-btn-large {
+    border: 2px solid white;
+    color: white;
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cta-button:hover .btn-icon {
+    transform: translateX(4px);
+  }
+  
+  .btn-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  /* Service cards */
+  .service-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Feature cards */
+  .feature-card {
+    text-align: center;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .feature-icon {
+    transition: all 0.3s ease;
+  }
+  
+  .feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  /* Pricing cards */
+  .pricing-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+  
+  .pricing-card:hover {
+    transform: translateY(-8px);
+    border-color: #3b82f6;
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+  }
+  
+  .check-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    margin-right: 8px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  /* Moving dots animation */
+  .moving-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(59, 130, 246, 0.2);
+    border-radius: 50%;
+    animation: moveDot 8s linear infinite;
+  }
+  
+  .dot-1 { top: 20%; left: 10%; animation-delay: 0s; }
+  .dot-2 { top: 60%; left: 80%; animation-delay: 2s; }
+  .dot-3 { top: 40%; left: 50%; animation-delay: 4s; }
+  .dot-4 { bottom: 30%; left: 20%; animation-delay: 6s; }
+  .dot-5 { bottom: 60%; right: 30%; animation-delay: 1s; }
+  
+  @keyframes moveDot {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translate(100px, -100px); opacity: 0; }
+  }
+  
+  /* Floating elements */
+  .floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .floating-element {
+    position: absolute;
+    font-size: 24px;
+    animation: floatElement 4s ease-in-out infinite;
+  }
+  
+  .element-1 { top: 20%; left: 10%; animation-delay: 0s; }
+  .element-2 { top: 60%; right: 15%; animation-delay: 1s; }
+  .element-3 { bottom: 30%; left: 20%; animation-delay: 2s; }
+  .element-4 { bottom: 60%; right: 25%; animation-delay: 3s; }
+  
+  @keyframes floatElement {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
+  }
+  
+  /* Scroll animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+  
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .animate-on-scroll-delay {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease 0.2s;
+  }
+  
+  .animate-on-scroll-delay.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .animate-on-scroll-delay-2 {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease 0.4s;
+  }
+  
+  .animate-on-scroll-delay-2.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<!-- JavaScript for Motion Design -->
+<script>
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all elements with animate-on-scroll classes
+  document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-scroll-delay, .animate-on-scroll-delay-2');
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // Add hover effects to service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+    
+    // Add click ripple effect to buttons
+    const buttons = document.querySelectorAll('.cta-button');
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const ripple = document.createElement('span');
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.classList.add('ripple');
+        
+        button.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+  });
+  
+  // Add ripple effect styles
+  const style = document.createElement('style');
+  style.textContent = `
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0);
+      animation: ripple-animation 0.6s linear;
+      pointer-events: none;
+    }
+    
+    @keyframes ripple-animation {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
 {% endblock %} 
