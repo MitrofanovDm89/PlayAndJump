@@ -4,22 +4,81 @@
 {% block title %}Startseite – Play & Jump{% endblock %}
 
 {% block content %}
-<h1>Willkommen bei Play & Jump!</h1>
-<p>Hier sind unsere beliebtesten Produkte:</p>
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Willkommen bei Play & Jump!</h1>
+    <p class="text-xl md:text-2xl mb-8">Ihre Experten für Spielgeräte und Unterhaltung</p>
+    <a href="/katalog/" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+      Katalog entdecken
+    </a>
+  </div>
+</div>
 
-<div class="product-grid">
-  {% for product in featured %}
-    <div class="product-card">
-      <a href="{% url 'product_detail' slug=product.slug %}">
-        {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.title }}">
-        {% endif %}
-        <h2>{{ product.title }}</h2>
-        <p>{{ product.price }} €</p>
-      </a>
+<!-- Featured Products Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Unsere beliebtesten Produkte</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for product in featured %}
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+        <a href="{% url 'product_detail' slug=product.slug %}">
+          {% if product.image %}
+            <div class="aspect-w-16 aspect-h-9">
+              <img src="{{ product.image.url }}" 
+                   alt="{{ product.title }}" 
+                   class="w-full h-48 object-cover object-center">
+            </div>
+          {% endif %}
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ product.title }}</h3>
+            <p class="text-2xl font-bold text-blue-600">{{ product.price }} €</p>
+          </div>
+        </a>
+      </div>
+    {% empty %}
+      <div class="col-span-full text-center py-12">
+        <p class="text-gray-500 text-lg">Zurzeit sind keine Produkte verfügbar.</p>
+        <a href="/katalog/" class="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+          Alle Produkte anzeigen
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Features Section -->
+<div class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center">
+        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Qualität</h3>
+        <p class="text-gray-600">Hochwertige Spielgeräte für alle Altersgruppen</p>
+      </div>
+      <div class="text-center">
+        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Schnelle Lieferung</h3>
+        <p class="text-gray-600">Schnelle und zuverlässige Lieferung</p>
+      </div>
+      <div class="text-center">
+        <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Service</h3>
+        <p class="text-gray-600">Professioneller Kundenservice</p>
+      </div>
     </div>
-  {% empty %}
-    <p>Zurzeit sind keine Produkte verfügbar.</p>
-  {% endfor %}
+  </div>
 </div>
 {% endblock %}
