@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
-from catalog.models import Product
+from catalog.models import Product, Category
 from .models import Page
 
 def home(request):
@@ -21,6 +21,11 @@ def datenschutz(request):
 
 def ueber_uns(request):
     return render(request, 'pages/ueber_uns.html')
+
+def katalog_view(request):
+    categories = Category.objects.all()
+    return render(request, 'main/katalog.html', {'categories': categories})
+
 def page_detail(request, slug):
     page = get_object_or_404(Page, slug=slug, is_active=True)
     return render(request, 'main/page_detail.html', {'page': page})
