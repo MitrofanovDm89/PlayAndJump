@@ -1,8 +1,248 @@
 {% extends 'base.html' %}
-{% block title %}Kontakt – Play & Jump{% endblock %}
+{% block title %}Über Uns – Play & Jump{% endblock %}
 {% block content %}
 
-<h1>Kontakt</h1>
-<p>Hier finden Sie unsere Kontaktinformationen.</p>
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+    <div class="container mx-auto px-4 py-16">
+        <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Über Uns</h1>
+            <p class="text-xl opacity-90">Ihre Experten für unvergessliche Events und Spielspaß</p>
+        </div>
+    </div>
+</div>
+
+<!-- Company Story Section -->
+<div class="container mx-auto px-4 py-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Unsere Geschichte</h2>
+            <p class="text-gray-600 mb-6">
+                Seit über 15 Jahren sind wir Ihr verlässlicher Partner für unvergessliche Events und Veranstaltungen. 
+                Was als kleine Familienfirma begann, hat sich zu einem der führenden Anbieter für Hüpfburgen, 
+                Spielgeräte und Eventausstattung in der Region entwickelt.
+            </p>
+            <p class="text-gray-600 mb-6">
+                Unser Team aus erfahrenen Eventprofis und Technikern sorgt dafür, dass jedes Event ein voller Erfolg wird. 
+                Von Kindergeburtstagen bis hin zu großen Firmenveranstaltungen – wir machen Ihre Träume wahr.
+            </p>
+            <div class="grid grid-cols-3 gap-6 mt-8">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">15+</div>
+                    <div class="text-sm text-gray-600">Jahre Erfahrung</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">1000+</div>
+                    <div class="text-sm text-gray-600">Events durchgeführt</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">98%</div>
+                    <div class="text-sm text-gray-600">Zufriedene Kunden</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gradient-to-br from-purple-100 to-pink-100 rounded-lg p-8">
+            <div class="text-center">
+                <svg class="w-24 h-24 mx-auto text-purple-600 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Unser Showroom</h3>
+                <p class="text-gray-600 mb-6">
+                    Besuchen Sie unseren Showroom in Mannheim und lassen Sie sich von unserem Team persönlich beraten. 
+                    Hier können Sie alle unsere Produkte live erleben und testen.
+                </p>
+                <a href="/kontakt" class="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-200">
+                    Termin vereinbaren
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mission & Values Section -->
+<div class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Unsere Mission & Werte</h2>
+            <p class="text-gray-600">Was uns antreibt und was uns wichtig ist</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Mission -->
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Unsere Mission</h3>
+                <p class="text-gray-600">
+                    Wir schaffen unvergessliche Momente und bringen Freude in jedes Event. 
+                    Mit hochwertigen Produkten und erstklassigem Service machen wir Ihre Veranstaltung zum Erfolg.
+                </p>
+            </div>
+            
+            <!-- Quality -->
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Qualität</h3>
+                <p class="text-gray-600">
+                    Wir verwenden nur hochwertige Materialien und arbeiten mit renommierten Herstellern zusammen. 
+                    Sicherheit und Langlebigkeit stehen bei uns an erster Stelle.
+                </p>
+            </div>
+            
+            <!-- Service -->
+            <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Service</h3>
+                <p class="text-gray-600">
+                    Von der ersten Beratung bis zum Abbau sind wir für Sie da. 
+                    Unser Team sorgt für einen reibungslosen Ablauf und steht Ihnen bei Fragen zur Seite.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Team Section -->
+<div class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Unser Team</h2>
+        <p class="text-gray-600">Die Experten hinter Play & Jump</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Team Member 1 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-400 to-purple-500 h-48 flex items-center justify-center">
+                <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+            </div>
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Michael Schmidt</h3>
+                <p class="text-purple-600 font-semibold mb-3">Geschäftsführer</p>
+                <p class="text-gray-600 text-sm">
+                    Über 15 Jahre Erfahrung in der Eventbranche. Michael sorgt dafür, dass jedes Projekt perfekt umgesetzt wird.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Team Member 2 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-green-400 to-blue-500 h-48 flex items-center justify-center">
+                <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+            </div>
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Sarah Weber</h3>
+                <p class="text-purple-600 font-semibold mb-3">Event Managerin</p>
+                <p class="text-gray-600 text-sm">
+                    Sarah koordiniert alle Events und sorgt dafür, dass jeder Kunde die perfekte Beratung erhält.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Team Member 3 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-purple-400 to-pink-500 h-48 flex items-center justify-center">
+                <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+            </div>
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Thomas Müller</h3>
+                <p class="text-purple-600 font-semibold mb-3">Technischer Leiter</p>
+                <p class="text-gray-600 text-sm">
+                    Thomas und sein Team sorgen für den sicheren Auf- und Abbau aller Geräte und die technische Wartung.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Services Overview -->
+<div class="bg-gray-50 py-16">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Unsere Dienstleistungen</h2>
+            <p class="text-gray-600">Alles aus einer Hand für Ihr perfektes Event</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Hüpfburgen</h3>
+                <p class="text-sm text-gray-600">Verschiedene Größen und Motive</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Spielgeräte</h3>
+                <p class="text-sm text-gray-600">Für alle Altersgruppen</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Unterhaltung</h3>
+                <p class="text-sm text-gray-600">Popcorn, Zuckerwatte & mehr</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800 mb-2">Komplettservice</h3>
+                <p class="text-sm text-gray-600">Lieferung, Aufbau & Abbau</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-4">Bereit für Ihr nächstes Event?</h2>
+        <p class="text-xl opacity-90 mb-8">Lassen Sie uns gemeinsam etwas Großartiges schaffen</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/katalog" class="inline-flex items-center px-8 py-4 bg-white text-purple-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                </svg>
+                Produkte entdecken
+            </a>
+            <a href="/kontakt" class="inline-flex items-center px-8 py-4 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors duration-200">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                </svg>
+                Kontakt aufnehmen
+            </a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
