@@ -8,4 +8,5 @@ urlpatterns = [
     path('impressum/', views.impressum, name='impressum'),
     path('datenschutz/', views.datenschutz, name='datenschutz'),
     path('ueber-uns/', views.ueber_uns, name='ueber_uns'),
+    path('<slug:slug>/', views.page_detail, name='page_detail'),
 ]

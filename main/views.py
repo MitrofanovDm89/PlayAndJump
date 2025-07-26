@@ -1,4 +1,8 @@
 from django.shortcuts import render
+from django.conf import settings
+from django.http import Http404
+import json
+import os
 from catalog.models import Product
 
 def home(request):
@@ -19,3 +23,20 @@ def datenschutz(request):
 
 def ueber_uns(request):
     return render(request, 'main/ueber_uns.html')
+
+
+def _load_pages():
+    pages_path = os.path.join(settings.BASE_DIR, 'Backup', 'pages.json')
+    try:
+        with open(pages_path, encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+
+def page_detail(request, slug):
+    pages = _load_pages()
+    page = next((p for p in pages if p.get('slug') == slug), None)
+    if not page:
+        raise Http404('Page not found')
+    return render(request, 'main/page_detail.html', {'page': page})

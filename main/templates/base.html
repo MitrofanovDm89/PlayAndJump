@@ -5,43 +5,39 @@
     <meta charset="UTF-8">
     <title>{% block title %}Play & Jump{% endblock %}</title>
     
-    <!-- Стили сайта -->
-    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
-
-    <!-- Flatpickr стили и скрипт -->
+    <!-- Tailwind CSS via CDN for quick prototyping -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flatpickr date picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
-<body>
-    <header>
-        <h1><a href="/">Play & Jump</a></h1>
-        <nav>
-            <a href="/katalog/">Katalog</a>
-            <a href="/ueber-uns/">Über uns</a>
-            <a href="/kontakt/">Kontakt</a>
-        </nav>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-gray-800 text-white">
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <h1 class="text-xl font-bold"><a href="/" class="hover:text-cyan-200">Play & Jump</a></h1>
+            {% include 'partials/navbar.html' %}
+        </div>
     </header>
 
-    <!-- ✅ Блок с flash-сообщениями -->
     {% if messages %}
-      <ul class="messages">
+      <ul class="container mx-auto p-4">
         {% for message in messages %}
           <li class="{{ message.tags }}">{{ message }}</li>
         {% endfor %}
       </ul>
     {% endif %}
 
-    <main>
+    <main class="flex-1 container mx-auto p-4">
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; {{ now|date:"Y" }} Play & Jump. Alle Rechte vorbehalten.</p>
-            <nav>
-                <a href="/impressum/">Impressum</a> |
-                <a href="/datenschutz/">Datenschutz</a> |
-                <a href="/agb/">AGB</a>
+    <footer class="bg-gray-200 text-center py-4">
+        <div class="space-x-2">
+            <p class="text-sm">&copy; {{ now|date:"Y" }} Play & Jump</p>
+            <nav class="space-x-2">
+                <a class="hover:underline" href="/impressum/">Impressum</a>
+                <a class="hover:underline" href="/datenschutz/">Datenschutz</a>
+                <a class="hover:underline" href="/agb/">AGB</a>
             </nav>
         </div>
     </footer>
