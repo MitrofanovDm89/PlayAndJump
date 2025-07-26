@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}
+{% extends "admin/base.html" %}
 {% load i18n static %}
 
 {% block extrastyle %}
@@ -12,6 +12,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    
+    /* Скрываем стандартный хедер Django */
+    #header {
+        display: none !important;
+    }
+    
+    #container {
+        margin: 0 !important;
+        padding: 0 !important;
     }
     
     .login-container {
