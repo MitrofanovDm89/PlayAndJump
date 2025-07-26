@@ -22,3 +22,7 @@ media/
 # System
 .DS_Store
 Thumbs.db
+
+# Backup folder - contains large files from old site
+Backup/
+Backup/*
