@@ -1,0 +1,56 @@
+{% load static %}
+<nav class="bg-white border-b border-gray-200 shadow-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <!-- Логотип -->
+      <div class="flex-shrink-0 flex items-center">
+        <a href="/">
+          <img class="h-10 w-auto" src="{% static 'main/img/jumpplay-1.0-1.png' %}" alt="Play & Jump Logo">
+        </a>
+      </div>
+      <!-- Десктоп меню -->
+      <div class="hidden md:flex space-x-8 items-center">
+        <a href="/" class="text-gray-700 hover:text-blue-600 font-semibold transition">Startseite</a>
+        <a href="/katalog/" class="text-gray-700 hover:text-blue-600 font-semibold transition">Katalog</a>
+        <a href="/vermietung/" class="text-gray-700 hover:text-blue-600 font-semibold transition">Vermietung</a>
+        <a href="/ueber-uns/" class="text-gray-700 hover:text-blue-600 font-semibold transition">Über uns</a>
+        <a href="/neuigkeiten/" class="text-gray-700 hover:text-blue-600 font-semibold transition">Neuigkeiten</a>
+        <a href="/kontakt/" class="text-gray-700 hover:text-blue-600 font-semibold transition">Kontakt</a>
+        <a href="/cart/" class="relative text-gray-700 hover:text-blue-600 font-semibold transition flex items-center">
+          <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Warenkorb
+          <!-- Счетчик товаров -->
+          <span class="ml-1 bg-blue-600 text-white text-xs rounded-full px-2 py-0.5">0</span>
+        </a>
+      </div>
+      <!-- Мобильное меню -->
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+          <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Мобильное выпадающее меню -->
+  <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 bg-white border-b border-gray-200">
+    <a href="/" class="block py-2 text-gray-700 hover:text-blue-600 font-semibold transition">Startseite</a>
+    <a href="/katalog/" class="block py-2 text-gray-700 hover:text-blue-600 font-semibold transition">Katalog</a>
+    <a href="/vermietung/" class="block py-2 text-gray-700 hover:text-blue-600 font-semibold transition">Vermietung</a>
+    <a href="/ueber-uns/" class="block py-2 text-gray-700 hover:text-blue-600 font-semibold transition">Über uns</a>
+    <a href="/neuigkeiten/" class="block py-2 text-gray-700 hover:text-blue-600 font-semibold transition">Neuigkeiten</a>
+    <a href="/kontakt/" class="block py-2 text-gray-700 hover:text-blue-600 font-semibold transition">Kontakt</a>
+    <a href="/cart/" class="block py-2 text-gray-700 hover:text-blue-600 font-semibold transition flex items-center">
+      <svg class="w-6 h-6 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Warenkorb <span class="ml-1 bg-blue-600 text-white text-xs rounded-full px-2 py-0.5">0</span>
+    </a>
+  </div>
+  <script>
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</nav> 

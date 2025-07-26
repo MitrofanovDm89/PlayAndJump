@@ -13,14 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <body>
-    <header>
-        <h1><a href="/">Play & Jump</a></h1>
-        <nav>
-            <a href="/katalog/">Katalog</a>
-            <a href="/ueber-uns/">Über uns</a>
-            <a href="/kontakt/">Kontakt</a>
-        </nav>
-    </header>
+    {% include 'main/partials/navbar.html' %}
 
     <!-- ✅ Блок с flash-сообщениями -->
     {% if messages %}
