@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'catalog',
     'cart',
     'tailwind',
-    #'theme',  # мы создадим это приложение
+    'theme',
 ]
 
 MIDDLEWARE = [

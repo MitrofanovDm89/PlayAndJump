@@ -22,3 +22,7 @@ media/
 # System
 .DS_Store
 Thumbs.db
+
+# Tailwind theme
+theme/static_src/node_modules/
+theme/static_src/package-lock.json
