@@ -2,14 +2,14 @@
 {% block title %}Warenkorb – Play & Jump{% endblock %}
 
 {% block content %}
-<div class="cart-container">
-  <h1>🛒 Dein Warenkorb</h1>
+<div class="max-w-2xl mx-auto p-8">
+  <h1 class="text-2xl font-semibold mb-4">🛒 Dein Warenkorb</h1>
 
   {% if cart %}
-    <ul class="cart-list">
+    <ul class="list-none p-0">
       {% for item in cart %}
-        <li class="cart-item">
-          <div class="item-info">
+        <li class="flex justify-between items-center py-4 border-b">
+          <div class="text-base">
             <p><strong>{{ item.product.title }}</strong></p>
             <p>{{ item.quantity }} × {{ item.price }} € = <strong>{{ item.total_price }} €</strong></p>
 
@@ -20,13 +20,13 @@
 
           <form action="{% url 'cart:remove' item.product.id %}" method="post" class="remove-form">
             {% csrf_token %}
-            <button type="submit" class="btn-remove">Entfernen</button>
+            <button type="submit" class="bg-red-600 text-white py-2 px-3 rounded hover:bg-red-700">Entfernen</button>
           </form>
         </li>
       {% endfor %}
     </ul>
 
-    <p class="cart-total">
+    <p class="mt-6 text-lg font-bold">
       <strong>Gesamtsumme:</strong> {{ cart.get_total_price }} €
     </p>
   {% else %}

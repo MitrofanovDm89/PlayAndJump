@@ -1,11 +1,11 @@
-{% load static %}
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Play & Jump{% endblock %}</title>
     
-    <link href="{% static 'css/dist/styles.css' %}" rel="stylesheet">
+    {% tailwind_css %}
     <!-- Flatpickr date picker -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

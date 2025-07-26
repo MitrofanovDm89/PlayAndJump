@@ -4,20 +4,20 @@
 {% block title %}{{ product.title }} – Play & Jump{% endblock %}
 
 {% block content %}
-<div class="product-detail">
-  <h1>{{ product.title }}</h1>
+<div class="flex flex-col gap-8 p-8">
+  <h1 class="text-2xl font-semibold">{{ product.title }}</h1>
 
-  <div class="product-info">
+  <div class="flex flex-wrap gap-8 items-start">
     {% if product.image %}
-      <div class="product-image">
-        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+      <div>
+        <img class="max-w-md w-full rounded-xl shadow" src="{{ product.image.url }}" alt="{{ product.title }}">
       </div>
     {% endif %}
 
-    <div class="product-meta">
-      <p><strong>Preis:</strong> {{ product.price }} €</p>
-      <p><strong>Beschreibung:</strong></p>
-      <p>{{ product.description|linebreaks }}</p>
+    <div class="flex-1 min-w-[250px]">
+      <p class="mb-2"><strong>Preis:</strong> {{ product.price }} €</p>
+      <p class="font-semibold">Beschreibung:</p>
+      <p class="mb-4">{{ product.description|linebreaks }}</p>
 
       <!-- 🛒 Форма с выбором диапазона дат аренды -->
       <form action="{% url 'cart:add' product.id %}" method="post">
@@ -34,16 +34,16 @@
           {{ form.quantity.label_tag }} {{ form.quantity }}
           {{ form.override }}
         </div>
-        <button type="submit" id="add-to-cart-btn" class="btn-cart">In den Warenkorb</button>
+        <button type="submit" id="add-to-cart-btn" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">In den Warenkorb</button>
       </form>
     </div>
   </div>
 
   <!-- 📅 Мини-календарь доступности -->
-  <div id="calendar" style="margin-top: 40px;"></div>
-  <p style="margin-top: 10px;"><strong>❌ Nicht verfügbare Daten sind rot markiert.</strong></p>
+  <div id="calendar" class="mt-10"></div>
+  <p class="mt-2 font-bold">❌ Nicht verfügbare Daten sind rot markiert.</p>
 
-  <a href="{% url 'category_detail' slug=product.category.slug %}" class="back-link">← Zurück zur Kategorie</a>
+  <a href="{% url 'category_detail' slug=product.category.slug %}" class="inline-block mt-8 text-blue-600 hover:underline">← Zurück zur Kategorie</a>
 </div>
 
 <!-- 📅 flatpickr + JS-проверка диапазона -->
