@@ -4,181 +4,357 @@
 {% block title %}{{ product.title }} – Play & Jump{% endblock %}
 
 {% block content %}
-<!-- Product Detail Section -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-    <!-- Product Image -->
-    <div class="space-y-4">
-      <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        {% if product.image %}
-          <img src="{{ product.image.url }}" 
-               alt="{{ product.title }}" 
-               class="w-full h-96 object-cover object-center">
-        {% else %}
-          <div class="w-full h-96 bg-gray-200 flex items-center justify-center">
-            <span class="text-gray-500">Kein Bild verfügbar</span>
-          </div>
-        {% endif %}
-      </div>
-      
-      <!-- Additional Images (placeholder for future) -->
-      <div class="grid grid-cols-4 gap-2">
-        <div class="bg-gray-200 rounded-lg h-20 flex items-center justify-center">
-          <span class="text-xs text-gray-500">+</span>
-        </div>
-        <div class="bg-gray-200 rounded-lg h-20 flex items-center justify-center">
-          <span class="text-xs text-gray-500">+</span>
-        </div>
-        <div class="bg-gray-200 rounded-lg h-20 flex items-center justify-center">
-          <span class="text-xs text-gray-500">+</span>
-        </div>
-        <div class="bg-gray-200 rounded-lg h-20 flex items-center justify-center">
-          <span class="text-xs text-gray-500">+</span>
-        </div>
-      </div>
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8">
+    <div class="container mx-auto px-4">
+        <nav class="flex mb-4" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="/" class="text-blue-200 hover:text-white transition-colors">Startseite</a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <a href="/katalog/" class="text-blue-200 hover:text-white transition-colors ml-1">Katalog</a>
+                    </div>
+                </li>
+                {% if product.category %}
+                <li>
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="text-blue-200 ml-1">{{ product.category.name }}</span>
+                    </div>
+                </li>
+                {% endif %}
+            </ol>
+        </nav>
+        <h1 class="text-3xl md:text-4xl font-bold">{{ product.title }}</h1>
     </div>
-
-    <!-- Product Info -->
-    <div class="space-y-6">
-      <!-- Breadcrumb -->
-      <nav class="flex" aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-3">
-          <li class="inline-flex items-center">
-            <a href="/" class="text-gray-700 hover:text-blue-600">Startseite</a>
-          </li>
-          <li>
-            <div class="flex items-center">
-              <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-              </svg>
-              <a href="/katalog/" class="text-gray-700 hover:text-blue-600">Katalog</a>
-            </div>
-          </li>
-          {% if product.category %}
-          <li>
-            <div class="flex items-center">
-              <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-              </svg>
-              <span class="text-gray-500">{{ product.category.name }}</span>
-            </div>
-          </li>
-          {% endif %}
-        </ol>
-      </nav>
-
-      <!-- Product Title and Category -->
-      <div>
-        {% if product.category %}
-          <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-            {{ product.category.name }}
-          </span>
-        {% endif %}
-        <h1 class="text-3xl font-bold text-gray-900 mt-2">{{ product.title }}</h1>
-      </div>
-
-      <!-- Price -->
-      <div class="flex items-center space-x-4">
-        <span class="text-4xl font-bold text-blue-600">{{ product.price }} €</span>
-        <span class="text-gray-500">pro Tag</span>
-      </div>
-
-      <!-- Description -->
-      <div>
-        <h3 class="text-lg font-semibold mb-2">Beschreibung</h3>
-        <p class="text-gray-600 leading-relaxed">{{ product.description }}</p>
-      </div>
-
-      <!-- Features -->
-      <div>
-        <h3 class="text-lg font-semibold mb-4">Eigenschaften</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="flex items-center space-x-3">
-            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Sichere Ausrüstung</span>
-          </div>
-          <div class="flex items-center space-x-3">
-            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Professioneller Aufbau</span>
-          </div>
-          <div class="flex items-center space-x-3">
-            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">Versicherung inklusive</span>
-          </div>
-          <div class="flex items-center space-x-3">
-            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span class="text-gray-700">24h Support</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4">
-        <button class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 flex items-center justify-center space-x-2">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
-          </svg>
-          <span>In den Warenkorb</span>
-        </button>
-        <button class="flex-1 border border-blue-600 text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
-          Jetzt anfragen
-        </button>
-      </div>
-
-      <!-- Availability -->
-      <div class="bg-gray-50 rounded-lg p-4">
-        <h3 class="text-lg font-semibold mb-2">Verfügbarkeit prüfen</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Anfangsdatum</label>
-            <input type="date" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Enddatum</label>
-            <input type="date" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          </div>
-        </div>
-        <button class="w-full bg-green-600 text-white py-2 px-4 rounded-lg mt-4 hover:bg-green-700 transition">
-          Verfügbarkeit prüfen
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Related Products -->
-  {% if related_products %}
-  <div class="mt-16">
-    <h2 class="text-2xl font-bold mb-8">Ähnliche Produkte</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {% for related_product in related_products %}
-        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-          <a href="{% url 'product_detail' slug=related_product.slug %}">
-            {% if related_product.image %}
-              <img src="{{ related_product.image.url }}" 
-                   alt="{{ related_product.title }}" 
-                   class="w-full h-48 object-cover object-center">
-            {% else %}
-              <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
-                <span class="text-gray-500">Kein Bild</span>
-              </div>
-            {% endif %}
-            <div class="p-4">
-              <h3 class="font-semibold text-gray-900 mb-2">{{ related_product.title }}</h3>
-              <p class="text-blue-600 font-bold">{{ related_product.price }} €</p>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-  {% endif %}
 </div>
+
+<!-- Product Detail Section -->
+<div class="container mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        
+        <!-- Product Images -->
+        <div class="space-y-6">
+            <!-- Main Image -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" 
+                         alt="{{ product.title }}" 
+                         class="w-full h-96 md:h-[500px] object-cover object-center">
+                {% else %}
+                    <div class="w-full h-96 md:h-[500px] bg-gray-200 flex items-center justify-center">
+                        <span class="text-gray-500">Kein Bild verfügbar</span>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Product Features -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Produkteigenschaften</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-700">Sichere Ausrüstung</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-700">Professioneller Aufbau</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-700">Versicherung inklusive</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <span class="text-gray-700">24h Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Info & Booking -->
+        <div class="space-y-8">
+            <!-- Product Info -->
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                {% if product.category %}
+                    <span class="inline-block bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-full mb-4">
+                        {{ product.category.name }}
+                    </span>
+                {% endif %}
+                
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ product.title }}</h2>
+                
+                <!-- Price -->
+                <div class="flex items-baseline space-x-2 mb-6">
+                    <span class="text-4xl font-bold text-blue-600">{{ product.price }} €</span>
+                    <span class="text-gray-500">pro Tag</span>
+                </div>
+                
+                <!-- Description -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Beschreibung</h3>
+                    <p class="text-gray-600 leading-relaxed">{{ product.description }}</p>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                    <button onclick="scrollToBooking()" class="flex-1 bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>Jetzt buchen</span>
+                    </button>
+                    <button class="flex-1 border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
+                        Anfrage senden
+                    </button>
+                </div>
+            </div>
+
+            <!-- Booking Calendar -->
+            <div id="booking-section" class="bg-white rounded-xl shadow-lg p-8">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">Verfügbarkeit & Buchung</h3>
+                
+                <!-- Date Selection -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Anfangsdatum</label>
+                        <input type="date" id="start-date" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Enddatum</label>
+                        <input type="date" id="end-date" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+                
+                <!-- Calendar Display -->
+                <div class="mb-6">
+                    <div id="calendar" class="bg-gray-50 rounded-lg p-4">
+                        <div class="text-center text-gray-500">Kalender wird geladen...</div>
+                    </div>
+                </div>
+                
+                <!-- Booking Summary -->
+                <div id="booking-summary" class="hidden bg-blue-50 rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold text-gray-800 mb-2">Buchungsübersicht</h4>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span>Anzahl Tage:</span>
+                            <span id="days-count">0</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Preis pro Tag:</span>
+                            <span>{{ product.price }} €</span>
+                        </div>
+                        <div class="border-t pt-2">
+                            <div class="flex justify-between font-semibold">
+                                <span>Gesamtpreis:</span>
+                                <span id="total-price">0 €</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Book Button -->
+                <button id="book-button" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300 hidden">
+                    Jetzt verbindlich buchen
+                </button>
+                
+                <!-- Availability Status -->
+                <div class="mt-4 text-center">
+                    <div id="availability-status" class="text-sm">
+                        <span class="text-gray-500">Wählen Sie ein Datum aus, um die Verfügbarkeit zu prüfen</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    {% if related_products %}
+    <div class="mt-16">
+        <h2 class="text-2xl font-bold text-gray-800 mb-8">Ähnliche Produkte</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {% for related_product in related_products %}
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                    <a href="{% url 'product_detail' slug=related_product.slug %}">
+                        {% if related_product.image %}
+                            <img src="{{ related_product.image.url }}" 
+                                 alt="{{ related_product.title }}" 
+                                 class="w-full h-48 object-cover object-center">
+                        {% else %}
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                <span class="text-gray-500">Kein Bild</span>
+                            </div>
+                        {% endif %}
+                        <div class="p-6">
+                            <h3 class="font-semibold text-gray-900 mb-2 line-clamp-2">{{ related_product.title }}</h3>
+                            <p class="text-blue-600 font-bold text-lg">{{ related_product.price }} €</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- JavaScript for Calendar and Booking -->
+<script>
+const bookedDates = {{ booked_dates|safe }};
+const productPrice = {{ product.price }};
+
+// Set minimum date to today
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('start-date').min = today;
+document.getElementById('end-date').min = today;
+
+// Date input event listeners
+document.getElementById('start-date').addEventListener('change', updateBooking);
+document.getElementById('end-date').addEventListener('change', updateBooking);
+
+function updateBooking() {
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    
+    if (startDate && endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        
+        if (start > end) {
+            document.getElementById('availability-status').innerHTML = '<span class="text-red-500">Enddatum muss nach dem Anfangsdatum liegen</span>';
+            return;
+        }
+        
+        // Check if any date in range is booked
+        const isBooked = isDateRangeBooked(startDate, endDate);
+        
+        if (isBooked) {
+            document.getElementById('availability-status').innerHTML = '<span class="text-red-500">❌ Ausgewählte Daten sind bereits gebucht</span>';
+            document.getElementById('booking-summary').classList.add('hidden');
+            document.getElementById('book-button').classList.add('hidden');
+        } else {
+            // Calculate days and total price
+            const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+            const totalPrice = days * productPrice;
+            
+            document.getElementById('days-count').textContent = days;
+            document.getElementById('total-price').textContent = totalPrice + ' €';
+            document.getElementById('booking-summary').classList.remove('hidden');
+            document.getElementById('book-button').classList.remove('hidden');
+            document.getElementById('availability-status').innerHTML = '<span class="text-green-500">✅ Verfügbar für Buchung</span>';
+        }
+        
+        renderCalendar(startDate, endDate);
+    }
+}
+
+function isDateRangeBooked(startDate, endDate) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    
+    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+        const dateStr = d.toISOString().split('T')[0];
+        if (bookedDates.includes(dateStr)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function renderCalendar(selectedStart, selectedEnd) {
+    const calendar = document.getElementById('calendar');
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    let html = '<div class="text-center mb-4"><h4 class="font-semibold text-gray-800">Verfügbarkeit im ' + 
+               new Date(year, month).toLocaleDateString('de-DE', { month: 'long', year: 'numeric' }) + '</h4></div>';
+    
+    html += '<div class="grid grid-cols-7 gap-1 text-xs">';
+    
+    // Day headers
+    const days = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+    days.forEach(day => {
+        html += '<div class="p-2 text-center font-semibold text-gray-600">' + day + '</div>';
+    });
+    
+    // Get first day of month and number of days
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startDay = firstDay.getDay() || 7; // Convert Sunday (0) to 7
+    const daysInMonth = lastDay.getDate();
+    
+    // Empty cells for days before month starts
+    for (let i = 1; i < startDay; i++) {
+        html += '<div class="p-2"></div>';
+    }
+    
+    // Days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = new Date(year, month, day).toISOString().split('T')[0];
+        const isBooked = bookedDates.includes(dateStr);
+        const isSelected = dateStr >= selectedStart && dateStr <= selectedEnd;
+        const isPast = new Date(dateStr) < new Date(today);
+        
+        let classes = 'p-2 text-center rounded cursor-pointer ';
+        
+        if (isPast) {
+            classes += 'text-gray-400 bg-gray-100';
+        } else if (isBooked) {
+            classes += 'text-white bg-red-500';
+        } else if (isSelected) {
+            classes += 'text-white bg-blue-500';
+        } else {
+            classes += 'text-gray-700 bg-white hover:bg-blue-50';
+        }
+        
+        html += '<div class="' + classes + '">' + day + '</div>';
+    }
+    
+    html += '</div>';
+    calendar.innerHTML = html;
+}
+
+function scrollToBooking() {
+    document.getElementById('booking-section').scrollIntoView({ 
+        behavior: 'smooth' 
+    });
+}
+
+// Initialize calendar
+renderCalendar();
+</script>
+
+<style>
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
+
 {% endblock %} 

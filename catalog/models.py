@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -42,3 +43,35 @@ class Availability(models.Model):
     def __str__(self):
         status = "verfügbar" if self.is_available else "nicht verfügbar"
         return f"{self.product.title} – {self.start_date} bis {self.end_date} – {status}"
+
+
+class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Ausstehend'),
+        ('confirmed', 'Bestätigt'),
+        ('cancelled', 'Storniert'),
+        ('completed', 'Abgeschlossen'),
+    ]
+    
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='bookings')
+    customer_name = models.CharField(max_length=200)
+    customer_email = models.EmailField()
+    customer_phone = models.CharField(max_length=20, blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    notes = models.TextField(blank=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.customer_name} - {self.product.title} ({self.start_date} bis {self.end_date})"
+    
+    @property
+    def duration_days(self):
+        """Возвращает количество дней бронирования"""
+        return (self.end_date - self.start_date).days + 1
