@@ -1,0 +1,151 @@
+
+/* Шрифты */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fdfdfd;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: #00bcd4;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Заголовок */
+header {
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+}
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+header nav a {
+  color: #fff;
+  margin-right: 20px;
+}
+
+/* Основная область */
+main {
+  padding: 20px;
+}
+
+/* Карточки товара */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.product-card img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* Детали товара */
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+.product-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.product-image img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.product-meta {
+  flex: 1;
+  min-width: 250px;
+}
+.product-meta p {
+  margin: 0.5rem 0;
+}
+
+/* Кнопки */
+.btn {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.btn:hover {
+  background-color: #e85d00;
+}
+.btn-remove {
+  background-color: #ccc;
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.btn-remove:hover {
+  background-color: #999;
+}
+
+/* Корзина */
+.cart-container {
+  padding: 2rem;
+}
+.cart-list {
+  list-style: none;
+  padding: 0;
+}
+.cart-item {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+/* Подвал */
+footer {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 40px;
+}
+footer nav a {
+  color: #333;
+  margin: 0 10px;
+}

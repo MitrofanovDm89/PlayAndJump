@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ category.name }} – Play & Jump{% endblock %}
+
+{% block content %}
+  <h1>{{ category.name }}</h1>
+  {% if category.description %}
+    <p>{{ category.description }}</p>
+  {% endif %}
+
+  {% if products %}
+    <div class="product-grid">
+      {% for product in products %}
+        <div class="product-card">
+          <a href="{% url 'product_detail' slug=product.slug %}">
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.title }}">
+            {% endif %}
+            <h2>{{ product.title }}</h2>
+            <p><strong>{{ product.price }} €</strong></p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Keine Produkte in dieser Kategorie.</p>
+  {% endif %}
+
+  <a href="{% url 'catalog_index' %}" class="back-link">← Zurück zum Katalog</a>
+{% endblock %}
+

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Kategorien – Play & Jump{% endblock %}
+
+{% block content %}
+<h1>Kategorien</h1>
+
+{% if categories %}
+  <div class="category-grid">
+    {% for category in categories %}
+      <div class="category-card">
+        <a href="{% url 'category_detail' slug=category.slug %}">
+          {% if category.image %}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+          {% endif %}
+          <h2>{{ category.name }}</h2>
+        </a>
+        {% if category.description %}
+          <p>{{ category.description }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>Keine Kategorien verfügbar.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Play & Jump{% endblock %}</title>
+    
+    <!-- Стили сайта -->
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+
+    <!-- Flatpickr стили и скрипт -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+    <header>
+        <h1><a href="/">Play & Jump</a></h1>
+        <nav>
+            <a href="/katalog/">Katalog</a>
+            <a href="/ueber-uns/">Über uns</a>
+            <a href="/kontakt/">Kontakt</a>
+        </nav>
+    </header>
+
+    <!-- ✅ Блок с flash-сообщениями -->
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; {{ now|date:"Y" }} Play & Jump. Alle Rechte vorbehalten.</p>
+            <nav>
+                <a href="/impressum/">Impressum</a> |
+                <a href="/datenschutz/">Datenschutz</a> |
+                <a href="/agb/">AGB</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
+
+

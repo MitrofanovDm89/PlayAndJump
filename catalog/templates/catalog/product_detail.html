@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ product.title }} – Play & Jump{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+  <h1>{{ product.title }}</h1>
+
+  <div class="product-info">
+    {% if product.image %}
+      <div class="product-image">
+        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+      </div>
+    {% endif %}
+
+    <div class="product-meta">
+      <p><strong>Preis:</strong> {{ product.price }} €</p>
+      <p><strong>Beschreibung:</strong></p>
+      <p>{{ product.description|linebreaks }}</p>
+
+      <!-- 🛒 Форма с выбором диапазона дат аренды -->
+      <form action="{% url 'cart:add' product.id %}" method="post">
+        {% csrf_token %}
+        <div>
+          <label for="rental-start">Von:</label>
+          <input type="text" id="rental-start" name="rental_start" required>
+        </div>
+        <div>
+          <label for="rental-end">Bis:</label>
+          <input type="text" id="rental-end" name="rental_end" required>
+        </div>
+        <div>
+          {{ form.quantity.label_tag }} {{ form.quantity }}
+          {{ form.override }}
+        </div>
+        <button type="submit" id="add-to-cart-btn" class="btn-cart">In den Warenkorb</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 📅 Мини-календарь доступности -->
+  <div id="calendar" style="margin-top: 40px;"></div>
+  <p style="margin-top: 10px;"><strong>❌ Nicht verfügbare Daten sind rot markiert.</strong></p>
+
+  <a href="{% url 'category_detail' slug=product.category.slug %}" class="back-link">← Zurück zur Kategorie</a>
+</div>
+
+<!-- 📅 flatpickr + JS-проверка диапазона -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const unavailableDates = {{ unavailable_dates|safe }};
+    const btn = document.getElementById('add-to-cart-btn');
+    const startInput = document.getElementById('rental-start');
+    const endInput = document.getElementById('rental-end');
+
+    function parseDate(str) {
+      const [year, month, day] = str.split("-");
+      return new Date(year, month - 1, day);
+    }
+
+    function formatDate(date) {
+      return date.toISOString().split('T')[0];
+    }
+
+    function getDatesInRange(start, end) {
+      const dates = [];
+      let current = new Date(start);
+      while (current <= end) {
+        dates.push(formatDate(current));
+        current.setDate(current.getDate() + 1);
+      }
+      return dates;
+    }
+
+    function validateDateRange() {
+      const start = startInput.value;
+      const end = endInput.value;
+
+      if (!start || !end) {
+        btn.disabled = true;
+        btn.textContent = "Bitte Zeitraum wählen";
+        return;
+      }
+
+      const startDate = parseDate(start);
+      const endDate = parseDate(end);
+
+      const selectedRange = getDatesInRange(startDate, endDate);
+      const conflict = selectedRange.some(date => unavailableDates.includes(date));
+
+      if (conflict) {
+        btn.disabled = true;
+        btn.textContent = "Nicht verfügbar";
+        btn.style.backgroundColor = "#ccc";
+      } else {
+        btn.disabled = false;
+        btn.textContent = "In den Warenkorb";
+        btn.style.backgroundColor = "";
+      }
+    }
+
+    flatpickr("#rental-start", {
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      locale: "de",
+      onChange: validateDateRange
+    });
+
+    flatpickr("#rental-end", {
+      dateFormat: "Y-m-d",
+      minDate: "today",
+      locale: "de",
+      onChange: validateDateRange
+    });
+
+    validateDateRange(); // проверка при загрузке
+
+    // Мини-календарь (таблица)
+    const calendarEl = document.createElement('table');
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth();
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    calendarEl.style.borderCollapse = 'collapse';
+    calendarEl.style.marginTop = '20px';
+
+    const headerRow = document.createElement('tr');
+    ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].forEach(day => {
+      const th = document.createElement('th');
+      th.textContent = day;
+      th.style.border = '1px solid #ccc';
+      th.style.padding = '5px';
+      headerRow.appendChild(th);
+    });
+    calendarEl.appendChild(headerRow);
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement('tr');
+      for (let j = 0; j < 7; j++) {
+        const cell = document.createElement('td');
+        cell.style.border = '1px solid #ccc';
+        cell.style.textAlign = 'center';
+        cell.style.padding = '5px';
+
+        if (i === 0 && j < (firstDay + 6) % 7) {
+          cell.innerHTML = '';
+        } else if (date <= daysInMonth) {
+          const dateStr = `${year}-${(month+1).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
+          cell.textContent = date;
+
+          if (unavailableDates.includes(dateStr)) {
+            cell.style.backgroundColor = '#f99';
+            cell.title = 'Nicht verfügbar';
+          }
+
+          date++;
+        }
+        row.appendChild(cell);
+      }
+      calendarEl.appendChild(row);
+    }
+
+    document.getElementById('calendar').appendChild(calendarEl);
+  });
+</script>
+{% endblock %}
+

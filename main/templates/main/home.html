@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Startseite – Play & Jump{% endblock %}
+
+{% block content %}
+<h1>Willkommen bei Play & Jump!</h1>
+<p>Hier sind unsere beliebtesten Produkte:</p>
+
+<div class="product-grid">
+  {% for product in featured %}
+    <div class="product-card">
+      <a href="{% url 'product_detail' slug=product.slug %}">
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.title }}">
+        {% endif %}
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.price }} €</p>
+      </a>
+    </div>
+  {% empty %}
+    <p>Zurzeit sind keine Produkte verfügbar.</p>
+  {% endfor %}
+</div>
+{% endblock %}

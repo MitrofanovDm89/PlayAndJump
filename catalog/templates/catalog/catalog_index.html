@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Alle Produkte</h1>
+  <div class="product-grid">
+    {% for product in products %}
+      <div class="product">
+        <a href="{% url 'product_detail' slug=product.slug %}">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          {% endif %}
+          <h2>{{ product.name }}</h2>
+        </a>
+        <p>{{ product.description|truncatewords:15 }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

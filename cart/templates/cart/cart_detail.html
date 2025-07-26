@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Warenkorb – Play & Jump{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+  <h1>🛒 Dein Warenkorb</h1>
+
+  {% if cart %}
+    <ul class="cart-list">
+      {% for item in cart %}
+        <li class="cart-item">
+          <div class="item-info">
+            <p><strong>{{ item.product.title }}</strong></p>
+            <p>{{ item.quantity }} × {{ item.price }} € = <strong>{{ item.total_price }} €</strong></p>
+
+            {% if item.rental_start and item.rental_end %}
+              <p><strong>Zeitraum:</strong> {{ item.rental_start }} bis {{ item.rental_end }}</p>
+            {% endif %}
+          </div>
+
+          <form action="{% url 'cart:remove' item.product.id %}" method="post" class="remove-form">
+            {% csrf_token %}
+            <button type="submit" class="btn-remove">Entfernen</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p class="cart-total">
+      <strong>Gesamtsumme:</strong> {{ cart.get_total_price }} €
+    </p>
+  {% else %}
+    <p>🧺 Dein Warenkorb ist leer.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
