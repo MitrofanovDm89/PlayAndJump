@@ -19,3 +19,20 @@ def datenschutz(request):
 
 def ueber_uns(request):
     return render(request, 'main/ueber_uns.html')
+
+def vermietung(request):
+    """Страница аренды оборудования"""
+    return render(request, 'main/vermietung.html')
+
+def neuigkeiten(request):
+    """Страница новостей"""
+    return render(request, 'main/neuigkeiten.html')
+
+def cart(request):
+    """Страница корзины"""
+    return render(request, 'main/cart.html')
+
+def katalog(request):
+    """Страница каталога"""
+    products = Product.objects.filter(is_active=True)
+    return render(request, 'main/katalog.html', {'products': products})

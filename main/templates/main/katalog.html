@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Katalog – Play & Jump{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Unser Katalog</h1>
+    <p class="text-xl md:text-2xl mb-8">Entdecken Sie unsere hochwertigen Spielgeräte und Unterhaltungsangebote</p>
+  </div>
+</div>
+
+<!-- Products Grid -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <!-- Filters Section -->
+  <div class="mb-8">
+    <div class="flex flex-wrap gap-4 items-center justify-between">
+      <h2 class="text-2xl font-bold text-gray-900">Alle Produkte</h2>
+      <div class="flex gap-2">
+        <select class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option>Sortieren nach</option>
+          <option>Preis: Niedrig zu Hoch</option>
+          <option>Preis: Hoch zu Niedrig</option>
+          <option>Name: A-Z</option>
+          <option>Name: Z-A</option>
+        </select>
+        <select class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option>Alle Kategorien</option>
+          <option>Hüpfburgen</option>
+          <option>Spielgeräte</option>
+          <option>Unterhaltung</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    {% for product in products %}
+      <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+        <div class="aspect-w-16 aspect-h-9">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" 
+                 alt="{{ product.title }}" 
+                 class="w-full h-48 object-cover object-center">
+          {% else %}
+            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+              <span class="text-gray-500">Kein Bild</span>
+            </div>
+          {% endif %}
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ product.title }}</h3>
+          <p class="text-gray-600 mb-4 line-clamp-2">{{ product.description|truncatewords:15 }}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-2xl font-bold text-blue-600">{{ product.price }} €</span>
+            <div class="flex gap-2">
+              <a href="{% url 'product_detail' slug=product.slug %}" 
+                 class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                Details
+              </a>
+              <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-span-full text-center py-12">
+        <div class="bg-gray-100 rounded-lg p-8">
+          <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+          </svg>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Keine Produkte verfügbar</h3>
+          <p class="text-gray-600">Zurzeit sind keine Produkte im Katalog verfügbar.</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Pagination -->
+  {% if products.has_other_pages %}
+    <div class="mt-12 flex justify-center">
+      <nav class="flex items-center space-x-2">
+        {% if products.has_previous %}
+          <a href="?page={{ products.previous_page_number }}" class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Zurück</a>
+        {% endif %}
+        
+        {% for num in products.paginator.page_range %}
+          {% if products.number == num %}
+            <span class="px-3 py-2 bg-blue-600 text-white rounded-lg">{{ num }}</span>
+          {% else %}
+            <a href="?page={{ num }}" class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">{{ num }}</a>
+          {% endif %}
+        {% endfor %}
+        
+        {% if products.has_next %}
+          <a href="?page={{ products.next_page_number }}" class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Weiter</a>
+        {% endif %}
+      </nav>
+    </div>
+  {% endif %}
+</div>
+{% endblock %} 

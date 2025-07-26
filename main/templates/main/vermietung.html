@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Vermietung – Play & Jump{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-green-600 to-blue-600 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Vermietung</h1>
+    <p class="text-xl md:text-2xl mb-8">Professionelle Vermietung von Spielgeräten für Ihre Events</p>
+  </div>
+</div>
+
+<!-- Services Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Service Card 1 -->
+    <div class="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition duration-300">
+      <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold mb-4">Hüpfburgen</h3>
+      <p class="text-gray-600 mb-6">Große Auswahl an sicheren und hochwertigen Hüpfburgen für alle Altersgruppen</p>
+      <a href="/katalog/" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+        Jetzt mieten
+      </a>
+    </div>
+
+    <!-- Service Card 2 -->
+    <div class="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition duration-300">
+      <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold mb-4">Spielgeräte</h3>
+      <p class="text-gray-600 mb-6">Verschiedene Spielgeräte wie Darts, Billard und andere Unterhaltungsangebote</p>
+      <a href="/katalog/" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+        Jetzt mieten
+      </a>
+    </div>
+
+    <!-- Service Card 3 -->
+    <div class="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition duration-300">
+      <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <h3 class="text-xl font-semibold mb-4">Express-Service</h3>
+      <p class="text-gray-600 mb-6">Schnelle Lieferung und Aufbau am Veranstaltungsort innerhalb von 24 Stunden</p>
+      <a href="/kontakt/" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+        Kontaktieren
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Process Section -->
+<div class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-12">So funktioniert die Vermietung</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Step 1 -->
+      <div class="text-center">
+        <div class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">1</div>
+        <h3 class="text-lg font-semibold mb-2">Auswahl</h3>
+        <p class="text-gray-600">Wählen Sie aus unserem umfangreichen Katalog die gewünschten Geräte</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="text-center">
+        <div class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">2</div>
+        <h3 class="text-lg font-semibold mb-2">Anfrage</h3>
+        <p class="text-gray-600">Senden Sie uns Ihre Anfrage mit Datum und Veranstaltungsort</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="text-center">
+        <div class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">3</div>
+        <h3 class="text-lg font-semibold mb-2">Bestätigung</h3>
+        <p class="text-gray-600">Wir bestätigen Ihre Buchung und senden Ihnen alle Details</p>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="text-center">
+        <div class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">4</div>
+        <h3 class="text-lg font-semibold mb-2">Lieferung</h3>
+        <p class="text-gray-600">Wir liefern und bauen die Geräte am Veranstaltungsort auf</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Contact CTA -->
+<div class="bg-blue-600 text-white py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-3xl font-bold mb-4">Bereit für Ihr Event?</h2>
+    <p class="text-xl mb-8">Kontaktieren Sie uns für ein unverbindliches Angebot</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/kontakt/" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+        Jetzt anfragen
+      </a>
+      <a href="/katalog/" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">
+        Katalog ansehen
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %} 
