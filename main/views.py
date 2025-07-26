@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from catalog.models import Product, Booking
+from catalog.models import Product, Booking, Category
 from datetime import date, timedelta
 import json
 
@@ -37,14 +37,38 @@ def cart(request):
 
 def katalog(request):
     """Страница каталога"""
-    products_list = Product.objects.filter(is_active=True).order_by('title')
+    # Get all categories for filter
+    categories = Category.objects.all().order_by('name')
+    
+    # Get filter parameters
+    category_filter = request.GET.get('category')
+    search_query = request.GET.get('search')
+    
+    # Start with all active products
+    products_list = Product.objects.filter(is_active=True)
+    
+    # Apply category filter
+    if category_filter:
+        products_list = products_list.filter(category__slug=category_filter)
+    
+    # Apply search filter
+    if search_query:
+        products_list = products_list.filter(title__icontains=search_query)
+    
+    # Order by title
+    products_list = products_list.order_by('title')
     
     # Pagination
     paginator = Paginator(products_list, 12)  # 12 products per page
     page_number = request.GET.get('page')
     products = paginator.get_page(page_number)
     
-    return render(request, 'main/katalog.html', {'products': products})
+    return render(request, 'main/katalog.html', {
+        'products': products,
+        'categories': categories,
+        'current_category': category_filter,
+        'search_query': search_query
+    })
 
 def product_detail(request, slug):
     """Страница деталей товара"""

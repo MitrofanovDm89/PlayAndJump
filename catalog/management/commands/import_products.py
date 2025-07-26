@@ -13,22 +13,18 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write('Starting product import...')
         
-        # Create categories
+        # Create categories based on the old site structure
         categories = {
             'huepfburgen': {
-                'name': 'Hüpfburgen',
+                'name': 'Hüpfburg',
                 'description': 'Sichere und hochwertige Hüpfburgen für alle Altersgruppen'
             },
-            'spielgeraete': {
-                'name': 'Spielgeräte',
-                'description': 'Verschiedene Spielgeräte für Unterhaltung und Spaß'
+            'gesellschaftsspiele': {
+                'name': 'Gesellschaftsspiele',
+                'description': 'Verschiedene Gesellschaftsspiele für Unterhaltung und Spaß'
             },
-            'unterhaltung': {
-                'name': 'Unterhaltung',
-                'description': 'Unterhaltungsangebote für Events und Feiern'
-            },
-            'lebensmittel': {
-                'name': 'Lebensmittel',
+            'fun-food': {
+                'name': 'Fun Food',
                 'description': 'Popcorn-Maschinen und andere Lebensmittelgeräte'
             }
         }
@@ -47,26 +43,43 @@ class Command(BaseCommand):
             if created:
                 self.stdout.write(f'Created category: {category.name}')
         
-        # Product data based on images from Backup
+        # Product data based on the old site list
         products_data = [
+            # Hüpfburgen Category
             {
-                'title': 'Hüpfburg "Circus"',
-                'slug': 'huepfburg-circus',
-                'description': 'Große, sichere Hüpfburg im Zirkus-Design. Perfekt für Kindergeburtstage und Events. Maximale Belastung: 500kg.',
+                'title': 'Hüpfburg',
+                'slug': 'huepfburg',
+                'description': 'Klassische Hüpfburg für alle Altersgruppen. Sicher und stabil.',
+                'price': 120.00,
+                'category': 'huepfburgen',
+                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder image
+            },
+            {
+                'title': 'Hüpfburg Zirkus',
+                'slug': 'huepfburg-zirkus',
+                'description': 'Große, sichere Hüpfburg im Zirkus-Design. Perfekt für Kindergeburtstage und Events.',
                 'price': 150.00,
                 'category': 'huepfburgen',
                 'image_file': 'hupfburg-zirkus-super-2.jpg'
             },
             {
-                'title': 'Hüpfburg "Dschungel"',
+                'title': 'Hüpfburg Dschungel',
                 'slug': 'huepfburg-dschungel',
                 'description': 'Spannende Dschungel-Hüpfburg mit wilden Tieren. Ideal für Abenteuer-Theme Events.',
-                'price': 120.00,
+                'price': 130.00,
                 'category': 'huepfburgen',
                 'image_file': 'Dschungel-1.jpg'
             },
             {
-                'title': 'Hüpfburg "Polizei"',
+                'title': 'Hüpfburg weiß',
+                'slug': 'huepfburg-weiss',
+                'description': 'Elegante weiße Hüpfburg für besondere Anlässe. Neutrales Design.',
+                'price': 110.00,
+                'category': 'huepfburgen',
+                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+            },
+            {
+                'title': 'Hüpfburg Polizei',
                 'slug': 'huepfburg-polizei',
                 'description': 'Polizei-Theme Hüpfburg für kleine Helden. Mit Polizei-Design und Sicherheitsausrüstung.',
                 'price': 130.00,
@@ -74,76 +87,128 @@ class Command(BaseCommand):
                 'image_file': 'Play-Jump-Polizei-1-scaled.jpg'
             },
             {
+                'title': 'Hüpfburg Delphin',
+                'slug': 'huepfburg-delphin',
+                'description': 'Meeresthema Hüpfburg mit Delphin-Design. Perfekt für Sommerfeste.',
+                'price': 125.00,
+                'category': 'huepfburgen',
+                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+            },
+            {
+                'title': 'Hüpfburg Madagaskar',
+                'slug': 'huepfburg-madagaskar',
+                'description': 'Exotische Madagaskar-Hüpfburg mit wilden Tieren. Einzigartiges Design.',
+                'price': 140.00,
+                'category': 'huepfburgen',
+                'image_file': 'Dschungel-1.jpg'  # Placeholder
+            },
+            {
+                'title': 'Hüpfburg Party',
+                'slug': 'huepfburg-party',
+                'description': 'Bunte Party-Hüpfburg mit Konfetti-Design. Ideal für Feiern.',
+                'price': 135.00,
+                'category': 'huepfburgen',
+                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+            },
+            {
+                'title': 'Riesen Rutsche',
+                'slug': 'riesen-rutsche',
+                'description': 'Große Rutsche für Events. Sicher und unterhaltsam für alle Altersgruppen.',
+                'price': 80.00,
+                'category': 'huepfburgen',
+                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+            },
+            {
+                'title': 'Hüpfburg Maxi',
+                'slug': 'huepfburg-maxi',
+                'description': 'Extra große Hüpfburg für viele Kinder. Maximale Kapazität.',
+                'price': 180.00,
+                'category': 'huepfburgen',
+                'image_file': 'hupfburg-zirkus-super-2.jpg'  # Placeholder
+            },
+            {
+                'title': 'Hüpfburg Shooting Combo',
+                'slug': 'huepfburg-shooting-combo',
+                'description': 'Hüpfburg mit integriertem Schießstand. Doppelter Spaß.',
+                'price': 160.00,
+                'category': 'huepfburgen',
+                'image_file': 'Shooting-Combo.jpg'  # Placeholder
+            },
+            
+            # Gesellschaftsspiele Category
+            {
+                'title': 'Tor mit Radar',
+                'slug': 'tor-mit-radar',
+                'description': 'Fußballtor mit Geschwindigkeitsmessung. Professionelle Ausrüstung.',
+                'price': 90.00,
+                'category': 'gesellschaftsspiele',
+                'image_file': 'Fussball-Billiard-1.jpeg'  # Placeholder
+            },
+            {
+                'title': 'Fußball-Billiard',
+                'slug': 'fussball-billiard',
+                'description': 'Kombination aus Fußball und Billard. Einzigartiges Spielgerät für Events.',
+                'price': 90.00,
+                'category': 'gesellschaftsspiele',
+                'image_file': 'Fussball-Billiard-1.jpeg'
+            },
+            {
                 'title': 'Darts XXL',
                 'slug': 'darts-xxl',
                 'description': 'Großes Dart-Spiel für Erwachsene und Jugendliche. Professionelle Ausrüstung.',
                 'price': 80.00,
-                'category': 'spielgeraete',
+                'category': 'gesellschaftsspiele',
                 'image_file': 'Dart-XXL1.jpg'
-            },
-            {
-                'title': 'Fussball-Billiard',
-                'slug': 'fussball-billiard',
-                'description': 'Kombination aus Fußball und Billard. Einzigartiges Spielgerät für Events.',
-                'price': 90.00,
-                'category': 'spielgeraete',
-                'image_file': 'Fussball-Billiard-1.jpeg'
-            },
-            {
-                'title': 'Shooting Combo',
-                'slug': 'shooting-combo',
-                'description': 'Schießstand-Kombination mit verschiedenen Spielmodi. Sicher und unterhaltsam.',
-                'price': 100.00,
-                'category': 'spielgeraete',
-                'image_file': 'Shooting-Combo.jpg'
             },
             {
                 'title': 'XXL Schach',
                 'slug': 'xxl-schach',
                 'description': 'Riesiges Schachspiel für draußen. Perfekt für Parks und Events.',
                 'price': 70.00,
-                'category': 'spielgeraete',
+                'category': 'gesellschaftsspiele',
                 'image_file': 'XXL-Schach-Play-Jump-1-scaled.jpg'
             },
             {
-                'title': 'Popcorn-Maschine',
-                'slug': 'popcorn-maschine',
+                'title': 'Stockfangen',
+                'slug': 'stockfangen',
+                'description': 'Traditionelles Stockfangen-Spiel. Spaß für die ganze Familie.',
+                'price': 60.00,
+                'category': 'gesellschaftsspiele',
+                'image_file': 'XXL-Schach-Play-Jump-1-scaled.jpg'  # Placeholder
+            },
+            {
+                'title': 'Kickertisch',
+                'slug': 'kickertisch',
+                'description': 'Professioneller Kickertisch für Events. Hochwertige Ausführung.',
+                'price': 100.00,
+                'category': 'gesellschaftsspiele',
+                'image_file': 'Fussball-Billiard-1.jpeg'  # Placeholder
+            },
+            {
+                'title': '4 gewinnt XXL',
+                'slug': '4-gewinnt-xxl',
+                'description': 'Riesiges 4 gewinnt Spiel für draußen. Strategisches Denken.',
+                'price': 75.00,
+                'category': 'gesellschaftsspiele',
+                'image_file': 'XXL-Schach-Play-Jump-1-scaled.jpg'  # Placeholder
+            },
+            {
+                'title': 'Bull Rodeo',
+                'slug': 'bull-rodeo',
+                'description': 'Spannendes Bull Rodeo Spiel. Action und Spaß für alle.',
+                'price': 85.00,
+                'category': 'gesellschaftsspiele',
+                'image_file': 'Shooting-Combo.jpg'  # Placeholder
+            },
+            
+            # Fun Food Category
+            {
+                'title': 'Popcornmaschine',
+                'slug': 'popcornmaschine',
                 'description': 'Professionelle Popcorn-Maschine für Events. Frisches Popcorn für alle Gäste.',
                 'price': 60.00,
-                'category': 'lebensmittel',
+                'category': 'fun-food',
                 'image_file': 'POpcornmaschine-Rastatt-1.jpg'
-            },
-            {
-                'title': 'Zuckerwatte-Maschine',
-                'slug': 'zuckerwatte-maschine',
-                'description': 'Zuckerwatte-Maschine für süße Überraschungen. Ideal für Kinderfeste.',
-                'price': 50.00,
-                'category': 'lebensmittel',
-                'image_file': 'ZUCKERWATTEMASCHINE_.jpg'
-            },
-            {
-                'title': 'Kinderschminken',
-                'slug': 'kinderschminken',
-                'description': 'Professioneller Kinderschmink-Service. Verschiedene Motive und Designs.',
-                'price': 100.00,
-                'category': 'unterhaltung',
-                'image_file': 'kinderschminken-Geburtstag-.jpg'
-            },
-            {
-                'title': 'Stromerzeuger',
-                'slug': 'stromerzeuger',
-                'description': 'Professioneller Stromerzeuger für Events. Zuverlässige Stromversorgung.',
-                'price': 80.00,
-                'category': 'unterhaltung',
-                'image_file': 'Stromerzeuger-1-scaled.jpg'
-            },
-            {
-                'title': 'Party-Dekoration',
-                'slug': 'party-dekoration',
-                'description': 'Vollständige Party-Dekoration für verschiedene Anlässe. Farben und Motive wählbar.',
-                'price': 40.00,
-                'category': 'unterhaltung',
-                'image_file': 'Party-1.jpg'
             }
         ]
         
