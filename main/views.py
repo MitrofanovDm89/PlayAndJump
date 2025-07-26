@@ -1,9 +1,7 @@
-from django.shortcuts import render
-from django.conf import settings
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404
-import json
-import os
 from catalog.models import Product
+from .models import Page
 
 def home(request):
     featured = Product.objects.filter(is_active=True)[:4]
@@ -23,20 +21,6 @@ def datenschutz(request):
 
 def ueber_uns(request):
     return render(request, 'main/ueber_uns.html')
-
-
-def _load_pages():
-    pages_path = os.path.join(settings.BASE_DIR, 'Backup', 'pages.json')
-    try:
-        with open(pages_path, encoding='utf-8') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return []
-
-
 def page_detail(request, slug):
-    pages = _load_pages()
-    page = next((p for p in pages if p.get('slug') == slug), None)
-    if not page:
-        raise Http404('Page not found')
+    page = get_object_or_404(Page, slug=slug, is_active=True)
     return render(request, 'main/page_detail.html', {'page': page})
