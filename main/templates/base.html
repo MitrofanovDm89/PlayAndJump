@@ -10,6 +10,7 @@
     
     <!-- Стили сайта -->
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/footer.css' %}">
     
     <!-- Дополнительные стили для переопределения -->
     <style>
@@ -95,70 +96,6 @@
         initFooterBackgroundSlider();
       });
     </script>
-
-    <!-- Footer Background Slider CSS -->
-    <style>
-      /* Footer styles with higher specificity */
-      body > footer {
-        position: relative !important;
-        overflow: hidden !important;
-      }
-      
-      body > footer .footer-background-slider {
-        position: absolute !important;
-        inset: 0 !important;
-        overflow: hidden !important;
-        z-index: 1 !important;
-      }
-      
-      body > footer .footer-bg-slide {
-        position: absolute !important;
-        inset: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        object-position: center !important;
-        filter: blur(12px) brightness(0.4) !important;
-        transform: scale(1.2) !important;
-        opacity: 0 !important;
-        transition: opacity 3s ease-in-out !important;
-        z-index: 1 !important;
-      }
-      
-      body > footer .footer-bg-slide.active {
-        opacity: 1 !important;
-      }
-      
-      /* Ensure footer content is above background */
-      body > footer > div {
-        position: relative !important;
-        z-index: 10 !important;
-      }
-      
-      /* Override any conflicting styles from other pages */
-      body > footer * {
-        position: relative !important;
-        z-index: inherit !important;
-      }
-      
-      /* Specific override for floating shapes in footer */
-      body > footer .floating-shapes {
-        display: none !important;
-      }
-      
-      body > footer .shape {
-        display: none !important;
-      }
-      
-      /* Debug styles - make footer background more visible */
-      body > footer {
-        min-height: 200px !important;
-      }
-      
-      body > footer .footer-background-slider {
-        background: rgba(255, 0, 0, 0.1) !important; /* Red tint for debugging */
-      }
-    </style>
 </body>
 </html>
 
