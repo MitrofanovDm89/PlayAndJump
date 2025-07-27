@@ -338,7 +338,7 @@
 
 <!-- JavaScript for Motion Design -->
 <script>
-  // Intersection Observer for scroll animations
+  // Intersection Observer for animations
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -347,25 +347,25 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        entry.target.classList.add('animate-in');
       }
     });
   }, observerOptions);
   
-  // Observe all elements with animate-on-scroll classes
+  // Observe all animated elements
   document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-up-delay, .animate-fade-in-left, .animate-fade-in-right');
     animatedElements.forEach(el => observer.observe(el));
     
-    // Add hover effects for AGB sections
-    const agbSections = document.querySelectorAll('.agb-section');
-    agbSections.forEach(section => {
-      section.addEventListener('mouseenter', () => {
-        section.style.transform = 'translateY(-8px)';
+    // Add hover effects
+    const cards = document.querySelectorAll('.service-card, .info-card');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-5px) scale(1.02)';
       });
       
-      section.addEventListener('mouseleave', () => {
-        section.style.transform = 'translateY(0)';
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
       });
     });
   });
@@ -375,7 +375,17 @@
     const slides = document.querySelectorAll('.hero-bg-slide');
     if (slides.length === 0) return;
     
-    let currentSlide = 0;
+    // Start with a random slide instead of the first one
+    let currentSlide = Math.floor(Math.random() * slides.length);
+    
+    // Set initial state - show random slide, hide others
+    slides.forEach((slide, index) => {
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
     
     function nextSlide() {
       slides[currentSlide].classList.remove('active');

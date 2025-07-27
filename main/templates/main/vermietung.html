@@ -726,7 +726,19 @@
   // Background slider functionality
   function initBackgroundSlider() {
     const slides = document.querySelectorAll('.hero-bg-slide');
-    let currentSlide = 0;
+    if (slides.length === 0) return;
+    
+    // Start with a random slide instead of the first one
+    let currentSlide = Math.floor(Math.random() * slides.length);
+    
+    // Set initial state - show random slide, hide others
+    slides.forEach((slide, index) => {
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
     
     function nextSlide() {
       slides[currentSlide].classList.remove('active');
