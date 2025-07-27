@@ -5,8 +5,8 @@ from datetime import date, timedelta
 import json
 
 def home(request):
-    featured = Product.objects.filter(is_active=True).order_by('?')[:4]  # Random 4 products
-    return render(request, 'main/home.html', {'featured': featured})
+    """Главная страница - визитка компании"""
+    return render(request, 'main/home.html')
 
 def kontakt(request):
     return render(request, 'main/kontakt.html')
@@ -19,9 +19,6 @@ def impressum(request):
 
 def datenschutz(request):
     return render(request, 'main/datenschutz.html')
-
-def ueber_uns(request):
-    return render(request, 'main/ueber_uns.html')
 
 def vermietung(request):
     """Страница аренды оборудования"""

@@ -19,7 +19,7 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
     <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">Willkommen bei Play & Jump!</h1>
     <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in-up-delay">
-      Ihre Experten für Spielgeräte und Unterhaltung
+      Ihr Partner für unvergessliche Kinderfeste und Events
     </p>
     <div class="animate-fade-in-up-delay-2">
       <a href="/katalog/" class="cta-button primary-btn">
@@ -30,110 +30,128 @@
   </div>
 </div>
 
-<!-- Featured Products Section -->
+<!-- Main Content -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-  <div class="text-center mb-12">
-    <h2 class="text-4xl font-bold text-gray-900 mb-4 animate-on-scroll">Unsere beliebtesten Produkte</h2>
-    <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-on-scroll-delay">
-      Entdecken Sie unsere beliebtesten Spielgeräte und Unterhaltungsmöglichkeiten
+  <!-- Welcome Section -->
+  <div class="bg-white rounded-xl shadow-lg p-8 mb-12 animate-on-scroll">
+    <h2 class="text-3xl font-bold mb-6 text-blue-600">Willkommen bei Play & Jump</h2>
+    <p class="text-lg mb-8 text-gray-700 leading-relaxed">
+      Seit vielen Jahren bieten wir hochwertige Hüpfburgen, Gesellschaftsspiele und Unterhaltungsgeräte 
+      für alle Altersgruppen an. Wir sind Ihr Partner für unvergessliche Kinderfeste und Events.
     </p>
-  </div>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {% for product in featured %}
-      <div class="product-card animate-on-scroll" data-delay="{{ forloop.counter0|add:0 }}">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-          <a href="{% url 'product_detail' slug=product.slug %}">
-            {% if product.image %}
-              <div class="card-image-container">
-                <img src="{{ product.image.url }}" 
-                     alt="{{ product.title }}" 
-                     class="w-full h-48 object-cover object-center transition-transform duration-500 hover:scale-110">
-                <div class="card-overlay">
-                  <div class="price-badge">{{ product.price }} €</div>
-                </div>
-              </div>
-            {% endif %}
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ product.title }}</h3>
-              <p class="text-2xl font-bold text-blue-600">{{ product.price }} €</p>
-              <div class="mt-4">
-                <span class="details-btn">Details ansehen →</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    {% empty %}
-      <div class="col-span-full text-center py-12 animate-on-scroll">
-        <div class="empty-state">
-          <div class="empty-icon">📦</div>
-          <p class="text-gray-500 text-lg">Zurzeit sind keine Produkte verfügbar.</p>
-          <a href="/katalog/" class="mt-4 inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-            Alle Produkte anzeigen
-          </a>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-
-<!-- Features Section with Motion Design -->
-<div class="bg-gradient-to-br from-gray-50 to-blue-50 py-20 relative overflow-hidden">
-  <!-- Animated background elements -->
-  <div class="absolute inset-0">
-    <div class="moving-dots">
-      <div class="dot dot-1"></div>
-      <div class="dot dot-2"></div>
-      <div class="dot dot-3"></div>
-      <div class="dot dot-4"></div>
-      <div class="dot dot-5"></div>
-    </div>
-  </div>
-  
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-    <div class="text-center mb-12">
-      <h2 class="text-4xl font-bold text-gray-900 mb-4 animate-on-scroll">Warum Play & Jump?</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto animate-on-scroll-delay">
-        Wir bieten Ihnen die besten Spielgeräte und den besten Service
-      </p>
-    </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="feature-card animate-on-scroll">
-        <div class="text-center">
-          <div class="feature-icon">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Qualität</h3>
-          <p class="text-gray-600">Hochwertige Spielgeräte für alle Altersgruppen</p>
+    <div class="grid md:grid-cols-2 gap-8 mt-8">
+      <div class="mission-card animate-on-scroll">
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border-l-4 border-blue-500">
+          <h3 class="text-xl font-semibold mb-4 text-blue-700">Unsere Mission</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Wir möchten Kindern und Familien unvergessliche Momente schenken. 
+            Mit unseren sicheren und hochwertigen Geräten sorgen wir für Spaß und Freude bei jedem Event.
+          </p>
         </div>
       </div>
       
-      <div class="feature-card animate-on-scroll" data-delay="200">
-        <div class="text-center">
-          <div class="feature-icon">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Schnelle Lieferung</h3>
-          <p class="text-gray-600">Schnelle und zuverlässige Lieferung</p>
+      <div class="values-card animate-on-scroll">
+        <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border-l-4 border-green-500">
+          <h3 class="text-xl font-semibold mb-4 text-green-700">Unsere Werte</h3>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <span class="check-icon">✓</span>
+              <span class="ml-3">Sicherheit steht an erster Stelle</span>
+            </li>
+            <li class="flex items-center">
+              <span class="check-icon">✓</span>
+              <span class="ml-3">Hochwertige Qualität</span>
+            </li>
+            <li class="flex items-center">
+              <span class="check-icon">✓</span>
+              <span class="ml-3">Zuverlässiger Service</span>
+            </li>
+            <li class="flex items-center">
+              <span class="check-icon">✓</span>
+              <span class="ml-3">Faire Preise</span>
+            </li>
+          </ul>
         </div>
       </div>
-      
-      <div class="feature-card animate-on-scroll" data-delay="400">
-        <div class="text-center">
-          <div class="feature-icon">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M12 2.25a9.75 9.75 0 100 19.5 9.75 9.75 0 000-19.5z"></path>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Service</h3>
-          <p class="text-gray-600">Professioneller Kundenservice</p>
+    </div>
+  </div>
+  
+  <!-- Why Choose Us Section -->
+  <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl p-8 mb-12 animate-on-scroll">
+    <h2 class="text-3xl font-bold mb-8 text-center">Warum Play & Jump?</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="feature-card text-center">
+        <div class="text-5xl mb-4 animate-bounce">🎪</div>
+        <h3 class="text-xl font-semibold mb-3">Vielfalt</h3>
+        <p class="text-blue-100">Über 20 verschiedene Hüpfburgen und Spiele zur Auswahl</p>
+      </div>
+      <div class="feature-card text-center">
+        <div class="text-5xl mb-4 animate-bounce">🛡️</div>
+        <h3 class="text-xl font-semibold mb-3">Sicherheit</h3>
+        <p class="text-blue-100">Alle Geräte entsprechen den höchsten Sicherheitsstandards</p>
+      </div>
+      <div class="feature-card text-center">
+        <div class="text-5xl mb-4 animate-bounce">🚚</div>
+        <h3 class="text-xl font-semibold mb-3">Service</h3>
+        <p class="text-blue-100">Professioneller Auf- und Abbau inklusive</p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Team Section -->
+  <div class="bg-white rounded-xl shadow-lg p-8 mb-12 animate-on-scroll">
+    <h2 class="text-3xl font-bold mb-8 text-center text-gray-900">Unser Team</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="team-card">
+        <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl text-center">
+          <div class="text-4xl mb-4">👨‍💼</div>
+          <h3 class="text-xl font-semibold mb-2 text-orange-700">Alexander Steinke</h3>
+          <p class="text-orange-600 font-medium">Geschäftsführer</p>
+          <p class="text-gray-700 mt-3">
+            Über 10 Jahre Erfahrung in der Eventbranche. 
+            Spezialisiert auf sichere und hochwertige Spielgeräte.
+          </p>
         </div>
+      </div>
+      <div class="team-card">
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl text-center">
+          <div class="text-4xl mb-4">👨‍🔧</div>
+          <h3 class="text-xl font-semibold mb-2 text-purple-700">Unser Service-Team</h3>
+          <p class="text-purple-600 font-medium">Professionelle Betreuung</p>
+          <p class="text-gray-700 mt-3">
+            Geschultes Personal für Aufbau, Abbau und Betreuung 
+            während Ihrer Events.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Links Section -->
+  <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-8 animate-on-scroll">
+    <h2 class="text-3xl font-bold mb-8 text-center text-gray-900">Unsere Dienstleistungen</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="service-link-card">
+        <a href="/katalog/" class="block bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+          <div class="text-4xl mb-4 text-center">🎪</div>
+          <h3 class="text-xl font-semibold mb-3 text-center text-gray-900">Produktkatalog</h3>
+          <p class="text-gray-600 text-center">Entdecken Sie unsere Hüpfburgen, Gesellschaftsspiele und Fun Food Angebote</p>
+        </a>
+      </div>
+      <div class="service-link-card">
+        <a href="/vermietung/" class="block bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+          <div class="text-4xl mb-4 text-center">🚚</div>
+          <h3 class="text-xl font-semibold mb-3 text-center text-gray-900">Vermietung</h3>
+          <p class="text-gray-600 text-center">Zusätzliche Services und Spezialausstattung für Ihre Events</p>
+        </a>
+      </div>
+      <div class="service-link-card">
+        <a href="/kontakt/" class="block bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+          <div class="text-4xl mb-4 text-center">📞</div>
+          <h3 class="text-xl font-semibold mb-3 text-center text-gray-900">Kontakt</h3>
+          <p class="text-gray-600 text-center">Sprechen Sie mit uns über Ihre individuellen Anforderungen</p>
+        </a>
       </div>
     </div>
   </div>
@@ -221,158 +239,31 @@
   .cta-button {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    border-radius: 8px;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
     font-weight: 600;
+    text-decoration: none;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
   }
   
-  .primary-btn {
-    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
-    color: #2563eb;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .primary-btn:hover {
+  .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
   }
   
   .btn-icon {
     transition: transform 0.3s ease;
   }
   
-  .primary-btn:hover .btn-icon {
+  .cta-button:hover .btn-icon {
     transform: translateX(4px);
   }
   
-  /* Product cards */
-  .product-card {
-    transition: all 0.3s ease;
-  }
-  
-  .card-image-container {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.8) 0%, rgba(147, 51, 234, 0.8) 100%);
-    opacity: 0;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .product-card:hover .card-overlay {
-    opacity: 1;
-  }
-  
-  .price-badge {
-    background: rgba(255, 255, 255, 0.9);
-    color: #2563eb;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-  
-  .details-btn {
-    color: #2563eb;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .product-card:hover .details-btn {
-    transform: translateX(8px);
-  }
-  
-  /* Feature cards */
-  .feature-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  
-  .feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  }
-  
-  .feature-icon {
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .feature-card:hover .feature-icon {
-    transform: scale(1.1);
-  }
-  
-  /* Moving dots */
-  .moving-dots {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .dot {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: rgba(59, 130, 246, 0.3);
-    border-radius: 50%;
-    animation: moveDot 8s linear infinite;
-  }
-  
-  .dot-1 { top: 20%; left: 10%; animation-delay: 0s; }
-  .dot-2 { top: 40%; right: 20%; animation-delay: 2s; }
-  .dot-3 { bottom: 30%; left: 30%; animation-delay: 4s; }
-  .dot-4 { top: 60%; left: 60%; animation-delay: 6s; }
-  .dot-5 { bottom: 20%; right: 10%; animation-delay: 1s; }
-  
-  @keyframes moveDot {
-    0% { transform: translateY(0px) translateX(0px); }
-    50% { transform: translateY(-20px) translateX(10px); }
-    100% { transform: translateY(0px) translateX(0px); }
-  }
-  
-  /* Empty state */
-  .empty-state {
-    padding: 3rem;
-  }
-  
-  .empty-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    animation: bounce 2s infinite;
-  }
-  
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
-  }
-  
-  /* Scroll animations */
+  /* Cards and sections */
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -384,8 +275,35 @@
     transform: translateY(0);
   }
   
-  .animate-on-scroll-delay {
-    transition-delay: 0.2s;
+  .mission-card, .values-card, .feature-card, .team-card, .service-link-card {
+    transition: all 0.3s ease;
+  }
+  
+  .mission-card:hover, .values-card:hover, .feature-card:hover, .team-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .check-icon {
+    color: #10b981;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  /* Bounce animation */
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
   }
 </style>
 
@@ -410,9 +328,9 @@
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => observer.observe(el));
     
-    // Add hover effects for product cards
-    const productCards = document.querySelectorAll('.product-card');
-    productCards.forEach(card => {
+    // Add hover effects for cards
+    const cards = document.querySelectorAll('.mission-card, .values-card, .feature-card, .team-card, .service-link-card');
+    cards.forEach(card => {
       card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-8px)';
       });
@@ -424,3 +342,4 @@
   });
 </script>
 {% endblock %}
+
