@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Hero Section -->
-<div class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20 relative overflow-hidden">
+<div class="bg-gradient-to-r from-orange-500 to-red-600 text-white py-20 relative overflow-hidden">
   <!-- Animated background elements -->
   <div class="absolute inset-0">
     <div class="floating-shapes">
@@ -14,6 +14,19 @@
       <div class="shape shape-3"></div>
       <div class="shape shape-4"></div>
     </div>
+  </div>
+  
+  <!-- Background Image Slider -->
+  <div class="absolute inset-0">
+    <div class="hero-background-slider">
+      <div class="hero-bg-slide active" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-1.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-2.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-3.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-4.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-5.jpg' %}')"></div>
+    </div>
+    <!-- Overlay for better text readability -->
+    <div class="absolute inset-0 bg-gradient-to-r from-orange-500/80 to-red-600/80"></div>
   </div>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -404,6 +417,29 @@
 
 <!-- Custom CSS for Motion Design -->
 <style>
+  /* Hero Background Slider */
+  .hero-background-slider {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  
+  .hero-bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px) brightness(0.7);
+    transform: scale(1.1);
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+  }
+  
+  .hero-bg-slide.active {
+    opacity: 1;
+  }
+  
   /* Floating shapes animation */
   .floating-shapes {
     position: absolute;
@@ -687,6 +723,21 @@
 
 <!-- JavaScript for Motion Design -->
 <script>
+  // Background slider functionality
+  function initBackgroundSlider() {
+    const slides = document.querySelectorAll('.hero-bg-slide');
+    let currentSlide = 0;
+    
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    
+    // Change slide every 4 seconds
+    setInterval(nextSlide, 4000);
+  }
+  
   // Intersection Observer for scroll animations
   const observerOptions = {
     threshold: 0.1,
@@ -703,6 +754,9 @@
   
   // Observe all elements with animate-on-scroll classes
   document.addEventListener('DOMContentLoaded', () => {
+    // Initialize background slider
+    initBackgroundSlider();
+    
     const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-scroll-delay, .animate-on-scroll-delay-2');
     animatedElements.forEach(el => observer.observe(el));
     
