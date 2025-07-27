@@ -98,26 +98,55 @@
 
     <!-- Footer Background Slider CSS -->
     <style>
-      .footer-background-slider {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
+      /* Footer styles with higher specificity */
+      body > footer {
+        position: relative !important;
+        overflow: hidden !important;
       }
       
-      .footer-bg-slide {
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        filter: blur(12px) brightness(0.4);
-        transform: scale(1.2);
-        opacity: 0;
-        transition: opacity 3s ease-in-out;
+      body > footer .footer-background-slider {
+        position: absolute !important;
+        inset: 0 !important;
+        overflow: hidden !important;
+        z-index: 1 !important;
       }
       
-      .footer-bg-slide.active {
-        opacity: 1;
+      body > footer .footer-bg-slide {
+        position: absolute !important;
+        inset: 0 !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        filter: blur(12px) brightness(0.4) !important;
+        transform: scale(1.2) !important;
+        opacity: 0 !important;
+        transition: opacity 3s ease-in-out !important;
+        z-index: 1 !important;
+      }
+      
+      body > footer .footer-bg-slide.active {
+        opacity: 1 !important;
+      }
+      
+      /* Ensure footer content is above background */
+      body > footer > div {
+        position: relative !important;
+        z-index: 10 !important;
+      }
+      
+      /* Override any conflicting styles from other pages */
+      body > footer * {
+        position: relative !important;
+        z-index: inherit !important;
+      }
+      
+      /* Specific override for floating shapes in footer */
+      body > footer .floating-shapes {
+        display: none !important;
+      }
+      
+      body > footer .shape {
+        display: none !important;
       }
     </style>
 </body>
