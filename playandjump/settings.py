@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'main',
     'catalog',
     'cart',
+    'orders',
+    'accounts',
     'tailwind',
     #'theme',  # мы создадим это приложение
 ]

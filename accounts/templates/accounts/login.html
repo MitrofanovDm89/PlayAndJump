@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Anmeldung – Play & Jump{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-up">Anmeldung</h1>
+    <p class="text-xl md:text-2xl mb-8 animate-fade-in-up-delay">Willkommen zurück bei Play & Jump</p>
+  </div>
+</div>
+
+<!-- Login Form -->
+<div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="bg-white rounded-xl shadow-lg p-8">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-900 mb-2">Anmelden</h2>
+      <p class="text-gray-600">Geben Sie Ihre Anmeldedaten ein</p>
+    </div>
+    
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+      
+      <div>
+        <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+          Benutzername oder E-Mail
+        </label>
+        {{ form.username }}
+        {% if form.username.errors %}
+          <p class="text-red-600 text-sm mt-1">{{ form.username.errors.0 }}</p>
+        {% endif %}
+      </div>
+      
+      <div>
+        <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+          Passwort
+        </label>
+        {{ form.password }}
+        {% if form.password.errors %}
+          <p class="text-red-600 text-sm mt-1">{{ form.password.errors.0 }}</p>
+        {% endif %}
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" 
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200">
+        Anmelden
+      </button>
+    </form>
+    
+    <!-- Links -->
+    <div class="text-center mt-8 space-y-4">
+      <p class="text-gray-600">
+        Noch kein Konto? 
+        <a href="{% url 'accounts:register' %}" class="text-blue-600 hover:text-blue-800 font-semibold">
+          Hier registrieren
+        </a>
+      </p>
+      <p class="text-gray-600">
+        <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold">
+          Passwort vergessen?
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %} 

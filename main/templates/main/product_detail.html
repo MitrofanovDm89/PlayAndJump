@@ -125,10 +125,13 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
-                        <span>Jetzt buchen</span>
+                        <span>Verfügbarkeit prüfen</span>
                     </button>
-                    <button class="flex-1 border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-lg font-semibold hover:bg-blue-50 transition duration-300">
-                        Anfrage senden
+                    <button onclick="addToCart(event)" class="flex-1 border-2 border-blue-600 text-blue-600 py-4 px-6 rounded-lg font-semibold hover:bg-blue-50 transition duration-300 flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m6 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
+                        </svg>
+                        <span>In Warenkorb</span>
                     </button>
                 </div>
             </div>
@@ -178,7 +181,7 @@
                 </div>
                 
                 <!-- Book Button -->
-                <button id="book-button" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300 hidden">
+                <button id="book-button" onclick="addToCart(event)" class="w-full bg-green-600 text-white py-4 px-6 rounded-lg font-semibold hover:bg-green-700 transition duration-300 hidden">
                     Jetzt verbindlich buchen
                 </button>
                 
@@ -242,9 +245,21 @@ function updateBooking() {
     if (startDate && endDate) {
         const start = new Date(startDate);
         const end = new Date(endDate);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
         
-        if (start > end) {
-            document.getElementById('availability-status').innerHTML = '<span class="text-red-500">Enddatum muss nach dem Anfangsdatum liegen</span>';
+        // Проверяем валидность дат
+        if (start < today) {
+            document.getElementById('availability-status').innerHTML = '<span class="text-red-600 font-semibold">✗ Anfangsdatum kann nicht in der Vergangenheit liegen</span>';
+            document.getElementById('booking-summary').classList.add('hidden');
+            document.getElementById('book-button').classList.add('hidden');
+            return;
+        }
+        
+        if (end < start) {
+            document.getElementById('availability-status').innerHTML = '<span class="text-red-600 font-semibold">✗ Enddatum muss nach dem Anfangsdatum liegen</span>';
+            document.getElementById('booking-summary').classList.add('hidden');
+            document.getElementById('book-button').classList.add('hidden');
             return;
         }
         
@@ -252,7 +267,7 @@ function updateBooking() {
         const isBooked = isDateRangeBooked(startDate, endDate);
         
         if (isBooked) {
-            document.getElementById('availability-status').innerHTML = '<span class="text-red-500">❌ Ausgewählte Daten sind bereits gebucht</span>';
+            document.getElementById('availability-status').innerHTML = '<span class="text-red-600 font-semibold">❌ Ausgewählte Daten sind bereits gebucht</span>';
             document.getElementById('booking-summary').classList.add('hidden');
             document.getElementById('book-button').classList.add('hidden');
         } else {
@@ -264,10 +279,14 @@ function updateBooking() {
             document.getElementById('total-price').textContent = totalPrice + ' €';
             document.getElementById('booking-summary').classList.remove('hidden');
             document.getElementById('book-button').classList.remove('hidden');
-            document.getElementById('availability-status').innerHTML = '<span class="text-green-500">✅ Verfügbar für Buchung</span>';
+            document.getElementById('availability-status').innerHTML = '<span class="text-green-600 font-semibold">✅ Verfügbar für Buchung</span>';
         }
         
         renderCalendar(startDate, endDate);
+    } else {
+        document.getElementById('booking-summary').classList.add('hidden');
+        document.getElementById('book-button').classList.add('hidden');
+        document.getElementById('availability-status').innerHTML = '<span class="text-gray-500">Wählen Sie ein Datum aus, um die Verfügbarkeit zu prüfen</span>';
     }
 }
 
@@ -342,6 +361,166 @@ function scrollToBooking() {
     document.getElementById('booking-section').scrollIntoView({ 
         behavior: 'smooth' 
     });
+}
+
+function addToCart(event) {
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    
+    if (!startDate || !endDate) {
+        alert('Bitte wählen Sie ein Anfangs- und Enddatum aus.');
+        return;
+    }
+    
+    // Проверяем, что даты выбраны правильно
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    if (start < today) {
+        alert('Das Anfangsdatum kann nicht in der Vergangenheit liegen.');
+        return;
+    }
+    
+    if (end < start) {
+        alert('Das Enddatum muss nach dem Anfangsdatum liegen.');
+        return;
+    }
+    
+    const data = {
+        item_type: 'product',
+        item_id: {{ product.id }},
+        quantity: 1,
+        start_date: startDate,
+        end_date: endDate
+    };
+    
+    // Показываем индикатор загрузки
+    const button = event.target;
+    const originalText = button.innerHTML;
+    button.innerHTML = '<svg class="animate-spin h-5 w-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Wird hinzugefügt...';
+    button.disabled = true;
+    
+    console.log('Sending data to cart:', data);
+    
+    fetch('/cart/add/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            // Показываем успешное сообщение
+            showSuccessMessage('Produkt wurde erfolgreich zum Warenkorb hinzugefügt!');
+            // Обновляем счетчик корзины в навигации
+            updateCartCount(data.cart_count);
+            // Очищаем даты
+            document.getElementById('start-date').value = '';
+            document.getElementById('end-date').value = '';
+            // Скрываем кнопку бронирования
+            document.getElementById('book-button').classList.add('hidden');
+            document.getElementById('booking-summary').classList.add('hidden');
+        } else {
+            showErrorMessage(data.error || 'Fehler beim Hinzufügen zum Warenkorb.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showErrorMessage('Fehler beim Hinzufügen zum Warenkorb. Bitte versuchen Sie es erneut.');
+    })
+    .finally(() => {
+        // Восстанавливаем кнопку
+        button.innerHTML = originalText;
+        button.disabled = false;
+    });
+}
+
+function showSuccessMessage(message) {
+    // Создаем красивое уведомление об успехе
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full';
+    notification.innerHTML = `
+        <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span>${message}</span>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    // Показываем уведомление
+    setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+    }, 100);
+    
+    // Скрываем через 3 секунды
+    setTimeout(() => {
+        notification.classList.add('translate-x-full');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+function showErrorMessage(message) {
+    // Создаем красивое уведомление об ошибке
+    const notification = document.createElement('div');
+    notification.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full';
+    notification.innerHTML = `
+        <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span>${message}</span>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    // Показываем уведомление
+    setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+    }, 100);
+    
+    // Скрываем через 5 секунд
+    setTimeout(() => {
+        notification.classList.add('translate-x-full');
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 5000);
+}
+
+function updateCartCount(count) {
+    const cartCountElement = document.querySelector('.cart-count');
+    if (cartCountElement) {
+        cartCountElement.textContent = count;
+    }
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 // Initialize calendar

@@ -1,37 +1,540 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Warenkorb – Play & Jump{% endblock %}
 
 {% block content %}
-<div class="cart-container">
-  <h1>🛒 Dein Warenkorb</h1>
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-up">Warenkorb</h1>
+    <p class="text-xl md:text-2xl mb-8 animate-fade-in-up-delay">Ihre ausgewählten Produkte und Services</p>
+  </div>
+</div>
 
-  {% if cart %}
-    <ul class="cart-list">
-      {% for item in cart %}
-        <li class="cart-item">
-          <div class="item-info">
-            <p><strong>{{ item.product.title }}</strong></p>
-            <p>{{ item.quantity }} × {{ item.price }} € = <strong>{{ item.total_price }} €</strong></p>
-
-            {% if item.rental_start and item.rental_end %}
-              <p><strong>Zeitraum:</strong> {{ item.rental_start }} bis {{ item.rental_end }}</p>
-            {% endif %}
+<!-- Cart Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  {% if cart_items %}
+    <div class="grid lg:grid-cols-3 gap-8">
+      <!-- Cart Items -->
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-xl shadow-lg p-6">
+          <h2 class="text-2xl font-bold mb-6 text-gray-900">Ihre Auswahl</h2>
+          
+          <div class="space-y-6">
+            {% for item in cart_items %}
+              <div class="cart-item border-b border-gray-200 pb-6 last:border-b-0" data-item-id="{{ item.id }}">
+                <div class="flex items-start space-x-4">
+                  <!-- Item Image -->
+                  <div class="flex-shrink-0">
+                    {% if item.product and item.product.image %}
+                      <img src="{{ item.product.image.url }}" alt="{{ item.product.title }}" 
+                           class="w-20 h-20 object-cover rounded-lg">
+                    {% elif item.service and item.service.image %}
+                      <img src="{{ item.service.image.url }}" alt="{{ item.service.title }}" 
+                           class="w-20 h-20 object-cover rounded-lg">
+                    {% else %}
+                      <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">
+                          {% if item.product %}{{ item.product.title|slice:":2" }}{% else %}{{ item.service.title|slice:":2" }}{% endif %}
+                        </span>
+                      </div>
+                    {% endif %}
+                  </div>
+                  
+                  <!-- Item Details -->
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                      {{ item.item_name }}
+                    </h3>
+                    
+                    {% if item.start_date and item.end_date %}
+                      <p class="text-sm text-gray-600 mb-2">
+                        📅 {{ item.start_date|date:"d.m.Y" }} - {{ item.end_date|date:"d.m.Y" }}
+                        ({{ item.quantity }} Tag{{ item.quantity|pluralize:"e" }})
+                      </p>
+                    {% endif %}
+                    
+                    <p class="text-lg font-semibold text-blue-600">
+                      €{{ item.price|floatformat:2 }} {% if item.start_date and item.end_date %}pro Tag{% endif %}
+                    </p>
+                  </div>
+                  
+                  <!-- Quantity Controls -->
+                  <div class="flex items-center space-x-2">
+                    <button class="quantity-btn minus-btn bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded-lg transition-colors duration-200">
+                      -
+                    </button>
+                    <span class="quantity-display text-lg font-semibold text-gray-900 min-w-[2rem] text-center">
+                      {{ item.quantity }}
+                    </span>
+                    <button class="quantity-btn plus-btn bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg transition-colors duration-200">
+                      +
+                    </button>
+                  </div>
+                  
+                  <!-- Remove Button -->
+                  <button class="remove-item-btn text-red-500 hover:text-red-700 transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  </button>
+                </div>
+                
+                <!-- Item Total -->
+                <div class="mt-4 text-right">
+                  <p class="text-lg font-bold text-gray-900">
+                    Gesamt: €<span class="item-total">{{ item.total_price|floatformat:2 }}</span>
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
           </div>
-
-          <form action="{% url 'cart:remove' item.product.id %}" method="post" class="remove-form">
-            {% csrf_token %}
-            <button type="submit" class="btn-remove">Entfernen</button>
-          </form>
-        </li>
-      {% endfor %}
-    </ul>
-
-    <p class="cart-total">
-      <strong>Gesamtsumme:</strong> {{ cart.get_total_price }} €
-    </p>
+        </div>
+      </div>
+      
+      <!-- Cart Summary -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-xl shadow-lg p-6 sticky top-4">
+          <h3 class="text-xl font-bold mb-6 text-gray-900">Zusammenfassung</h3>
+          
+          <div class="space-y-4 mb-6">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Zwischensumme:</span>
+              <span class="font-semibold">€<span id="subtotal">{{ cart.total_price|floatformat:2 }}</span></span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">MwSt. (19%):</span>
+              <span class="font-semibold">€<span id="tax">{{ cart.total_price|multiply:0.19|floatformat:2 }}</span></span>
+            </div>
+            <hr class="border-gray-200">
+            <div class="flex justify-between text-lg font-bold">
+              <span>Gesamt:</span>
+              <span class="text-blue-600">€<span id="total">{{ cart.total_price|multiply:1.19|floatformat:2 }}</span></span>
+            </div>
+          </div>
+          
+          <div class="space-y-3">
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+              <button onclick="quickConfirm()" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
+                ✅ Yes - Schnell bestellen
+              </button>
+              <button onclick="bookNow()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
+                📅 Book - Jetzt buchen
+              </button>
+              <button onclick="viewHistory()" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
+                📋 War - Bestellungen
+              </button>
+              <button onclick="showOptions()" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 text-sm">
+                ⚙️ And - Optionen
+              </button>
+            </div>
+            
+            <!-- Main Actions -->
+            <a href="/orders/checkout/" class="block w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 text-center">
+              Zur Kasse
+            </a>
+            <button class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-6 rounded-lg transition-colors duration-200" onclick="clearCart()">
+              Warenkorb leeren
+            </button>
+            <a href="{% url 'katalog' %}" class="block w-full text-center text-blue-600 hover:text-blue-800 font-semibold py-3 px-6 transition-colors duration-200">
+              Weiter einkaufen
+            </a>
+            
+            <!-- Corporate Services -->
+            <button onclick="showCorporateServices()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+              🏢 Corp - Unternehmensservices
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   {% else %}
-    <p>🧺 Dein Warenkorb ist leer.</p>
+    <!-- Empty Cart -->
+    <div class="text-center py-16">
+      <div class="text-6xl mb-6">🛒</div>
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Ihr Warenkorb ist leer</h2>
+      <p class="text-xl text-gray-600 mb-8">Entdecken Sie unsere Produkte und Services</p>
+      <div class="space-x-4">
+        <a href="{% url 'katalog' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+          Katalog durchsuchen
+        </a>
+        <a href="{% url 'vermietung' %}" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+          Services entdecken
+        </a>
+      </div>
+    </div>
   {% endif %}
 </div>
+
+<script>
+// Cart functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Quantity controls
+    document.querySelectorAll('.quantity-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const item = this.closest('.cart-item');
+            const itemId = item.dataset.itemId;
+            const quantityDisplay = item.querySelector('.quantity-display');
+            let quantity = parseInt(quantityDisplay.textContent);
+            
+            if (this.classList.contains('plus-btn')) {
+                quantity++;
+            } else if (this.classList.contains('minus-btn')) {
+                quantity = Math.max(1, quantity - 1);
+            }
+            
+            updateCartItem(itemId, quantity);
+        });
+    });
+    
+    // Remove item
+    document.querySelectorAll('.remove-item-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const item = this.closest('.cart-item');
+            const itemId = item.dataset.itemId;
+            removeFromCart(itemId);
+        });
+    });
+});
+
+function updateCartItem(itemId, quantity) {
+    fetch(`/cart/update/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ quantity: quantity })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+
+function removeFromCart(itemId) {
+    fetch(`/cart/remove/${itemId}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    });
+}
+
+function clearCart() {
+    if (confirm('Möchten Sie wirklich den gesamten Warenkorb leeren?')) {
+        fetch('/cart/clear/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            }
+        });
+    }
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Quick Actions Functions
+function quickConfirm() {
+    if (confirm('Möchten Sie diese Bestellung schnell bestätigen? Dies wird automatisch mit Ihren Standarddaten bestellt.')) {
+        // Быстрое подтверждение заказа
+        fetch('/orders/quick-confirm/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                use_default_address: true,
+                payment_method: 'invoice'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Bestellung erfolgreich bestätigt! Bestellnummer: ' + data.order_number);
+                window.location.href = data.redirect_url;
+            } else {
+                alert('Fehler: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Fehler beim Bestätigen der Bestellung.');
+        });
+    }
+}
+
+function bookNow() {
+    // Переход к бронированию с календарем
+    const bookingUrl = '/orders/checkout/?booking=true';
+    window.location.href = bookingUrl;
+}
+
+function viewHistory() {
+    // Просмотр истории заказов
+    if (confirm('Möchten Sie Ihre Bestellhistorie anzeigen?')) {
+        window.location.href = '/accounts/orders/';
+    }
+}
+
+function showOptions() {
+    // Показать дополнительные опции
+    const options = [
+        '📧 E-Mail-Bestätigung anfordern',
+        '📱 SMS-Benachrichtigung aktivieren',
+        '🎁 Geschenkverpackung hinzufügen',
+        '🚚 Express-Lieferung',
+        '💳 Andere Zahlungsmethode',
+        '📋 Angebot anfordern'
+    ];
+    
+    const selectedOption = prompt(
+        'Wählen Sie eine Option:\n\n' + options.join('\n') + '\n\nGeben Sie die Nummer ein (1-6):'
+    );
+    
+    if (selectedOption) {
+        const optionIndex = parseInt(selectedOption) - 1;
+        if (optionIndex >= 0 && optionIndex < options.length) {
+            handleOption(optionIndex);
+        }
+    }
+}
+
+function handleOption(optionIndex) {
+    switch(optionIndex) {
+        case 0: // E-Mail-Bestätigung
+            alert('E-Mail-Bestätigung wird für alle zukünftigen Bestellungen aktiviert.');
+            break;
+        case 1: // SMS-Benachrichtigung
+            alert('SMS-Benachrichtigung wird aktiviert. Bitte geben Sie Ihre Telefonnummer in Ihrem Profil ein.');
+            break;
+        case 2: // Geschenkverpackung
+            addGiftWrapping();
+            break;
+        case 3: // Express-Lieferung
+            addExpressDelivery();
+            break;
+        case 4: // Andere Zahlungsmethode
+            showPaymentOptions();
+            break;
+        case 5: // Angebot anfordern
+            requestQuote();
+            break;
+    }
+}
+
+function addGiftWrapping() {
+    const giftMessage = prompt('Geben Sie eine Geschenknachricht ein (optional):');
+    if (giftMessage !== null) {
+        // Добавить услугу подарочной упаковки
+        fetch('/cart/add-service/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                service_type: 'gift_wrapping',
+                message: giftMessage,
+                price: 5.00
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Geschenkverpackung hinzugefügt!');
+                location.reload();
+            }
+        });
+    }
+}
+
+function addExpressDelivery() {
+    if (confirm('Express-Lieferung (+€15.00) hinzufügen?')) {
+        fetch('/cart/add-service/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                service_type: 'express_delivery',
+                price: 15.00
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Express-Lieferung hinzugefügt!');
+                location.reload();
+            }
+        });
+    }
+}
+
+function showPaymentOptions() {
+    const paymentMethods = [
+        '💳 Kreditkarte',
+        '🏦 Banküberweisung',
+        '💰 PayPal',
+        '💵 Rechnung',
+        '📱 Apple Pay'
+    ];
+    
+    const selected = prompt(
+        'Wählen Sie eine Zahlungsmethode:\n\n' + paymentMethods.join('\n') + '\n\nGeben Sie die Nummer ein (1-5):'
+    );
+    
+    if (selected) {
+        const methodIndex = parseInt(selected) - 1;
+        if (methodIndex >= 0 && methodIndex < paymentMethods.length) {
+            alert('Zahlungsmethode geändert zu: ' + paymentMethods[methodIndex]);
+        }
+    }
+}
+
+function requestQuote() {
+    const companyName = prompt('Firmenname:');
+    const contactPerson = prompt('Ansprechpartner:');
+    const email = prompt('E-Mail-Adresse:');
+    
+    if (companyName && contactPerson && email) {
+        fetch('/orders/request-quote/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                company_name: companyName,
+                contact_person: contactPerson,
+                email: email,
+                cart_items: '{{ cart_items|length }}'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Angebot erfolgreich angefordert! Wir werden uns innerhalb von 24 Stunden bei Ihnen melden.');
+            }
+        });
+    }
+}
+
+function showCorporateServices() {
+    const corporateServices = [
+        '🏢 Firmenevents & Teambuilding',
+        '🎪 Großveranstaltungen',
+        '📦 Langzeitmietverträge',
+        '🚚 Lieferung & Aufbau',
+        '👥 Event-Management',
+        '📋 Rahmenverträge'
+    ];
+    
+    let serviceList = 'Unternehmensservices:\n\n';
+    corporateServices.forEach((service, index) => {
+        serviceList += `${index + 1}. ${service}\n`;
+    });
+    serviceList += '\nGeben Sie die Nummer ein oder 0 für mehr Informationen:';
+    
+    const selected = prompt(serviceList);
+    
+    if (selected) {
+        const serviceIndex = parseInt(selected) - 1;
+        if (serviceIndex >= 0 && serviceIndex < corporateServices.length) {
+            showCorporateServiceDetails(serviceIndex);
+        } else if (selected === '0') {
+            window.location.href = '/kontakt/?type=corporate';
+        }
+    }
+}
+
+function showCorporateServiceDetails(serviceIndex) {
+    const serviceDetails = [
+        {
+            name: 'Firmenevents & Teambuilding',
+            description: 'Professionelle Ausstattung für Ihre Firmenfeiern und Teambuilding-Events.',
+            price: 'Ab €500/Tag',
+            contact: 'corporate@playandjump.de'
+        },
+        {
+            name: 'Großveranstaltungen',
+            description: 'Komplette Ausstattung für Messen, Konferenzen und Großveranstaltungen.',
+            price: 'Nach Vereinbarung',
+            contact: 'events@playandjump.de'
+        },
+        {
+            name: 'Langzeitmietverträge',
+            description: 'Günstige Konditionen für langfristige Mietverträge.',
+            price: 'Rabatt bis 30%',
+            contact: 'longterm@playandjump.de'
+        },
+        {
+            name: 'Lieferung & Aufbau',
+            description: 'Professioneller Auf- und Abbau vor Ort.',
+            price: '€50-150 je nach Entfernung',
+            contact: 'delivery@playandjump.de'
+        },
+        {
+            name: 'Event-Management',
+            description: 'Vollständige Planung und Durchführung Ihrer Events.',
+            price: 'Nach Vereinbarung',
+            contact: 'management@playandjump.de'
+        },
+        {
+            name: 'Rahmenverträge',
+            description: 'Spezielle Konditionen für regelmäßige Kunden.',
+            price: 'Individuelle Angebote',
+            contact: 'contracts@playandjump.de'
+        }
+    ];
+    
+    const service = serviceDetails[serviceIndex];
+    const details = `
+${service.name}
+
+${service.description}
+
+Preis: ${service.price}
+Kontakt: ${service.contact}
+
+Möchten Sie ein Angebot anfordern?
+    `;
+    
+    if (confirm(details)) {
+        window.location.href = `/kontakt/?service=${encodeURIComponent(service.name)}`;
+    }
+}
+</script>
 {% endblock %}
 

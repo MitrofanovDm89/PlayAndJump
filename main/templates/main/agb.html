@@ -5,18 +5,14 @@
 
 {% block content %}
 <!-- Hero Section with Motion Design -->
-<div class="bg-gradient-to-r from-gray-600 to-gray-800 text-white py-20 relative overflow-hidden agb-page">
+<div class="bg-gradient-to-r from-blue-600/40 to-purple-600/40 text-white py-20 relative overflow-hidden">
   <!-- Background Image Slider -->
   <div class="absolute inset-0">
-    <div class="hero-background-slider">
-      <div class="hero-bg-slide active" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-1.jpg' %}')"></div>
-      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-2.jpg' %}')"></div>
-      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-3.jpg' %}')"></div>
-      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-4.jpg' %}')"></div>
-      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-5.jpg' %}')"></div>
+    <div class="hero-background-slider" id="heroSlider">
+      <!-- Динамически загружаемые картинки будут здесь -->
     </div>
     <!-- Overlay for better text readability -->
-    <div class="absolute inset-0 bg-gradient-to-r from-gray-600/80 to-gray-800/80"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-purple-600/30"></div>
   </div>
   
   <!-- Animated background elements -->
@@ -26,14 +22,17 @@
       <div class="shape shape-2"></div>
       <div class="shape shape-3"></div>
       <div class="shape shape-4"></div>
+      <div class="bubble bubble-1"></div>
+      <div class="bubble bubble-2"></div>
+      <div class="bubble bubble-3"></div>
+      <div class="bubble bubble-4"></div>
+      <div class="bubble bubble-5"></div>
     </div>
   </div>
   
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-    <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">AGB</h1>
-    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in-up-delay">
-      Allgemeine Geschäftsbedingungen
-    </p>
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">Allgemeine Geschäftsbedingungen</h1>
+    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in-up-delay">Unsere Geschäftsbedingungen für eine transparente Zusammenarbeit</p>
   </div>
 </div>
 
@@ -205,7 +204,7 @@
 
 <!-- Custom CSS for Motion Design -->
 <style>
-  /* Background slider styles */
+/* Hero Background Slider */
   .hero-background-slider {
     position: absolute;
     inset: 0;
@@ -218,32 +217,32 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: blur(8px) brightness(0.3);
+    filter: blur(8px) brightness(1.3);
     transform: scale(1.1);
     opacity: 0;
-    transition: opacity 3s ease-in-out;
+    transition: opacity 2s ease-in-out;
   }
   
   .hero-bg-slide.active {
     opacity: 1;
   }
   
-  /* Floating shapes animation - SPECIFIC TO AGB PAGE ONLY */
-  .agb-page .floating-shapes {
+  /* Floating shapes animation */
+  .floating-shapes {
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
   }
   
-  .agb-page .shape {
+  .shape {
     position: absolute;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     animation: float 6s ease-in-out infinite;
   }
   
-  .agb-page .shape-1 {
+  .shape-1 {
     width: 80px;
     height: 80px;
     top: 20%;
@@ -251,7 +250,7 @@
     animation-delay: 0s;
   }
   
-  .agb-page .shape-2 {
+  .shape-2 {
     width: 120px;
     height: 120px;
     top: 60%;
@@ -259,7 +258,7 @@
     animation-delay: 2s;
   }
   
-  .agb-page .shape-3 {
+  .shape-3 {
     width: 60px;
     height: 60px;
     top: 40%;
@@ -267,7 +266,7 @@
     animation-delay: 4s;
   }
   
-  .agb-page .shape-4 {
+  .shape-4 {
     width: 100px;
     height: 100px;
     bottom: 20%;
@@ -276,9 +275,112 @@
   }
   
   @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(180deg); }
+    0%, 100% { transform: translateY(0px) rotate(0deg); 
+  
+  
+    50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
   }
+  
+      /* Bubble animations - soap bubbles */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    animation: soap-bubble 12s ease-in-out infinite;
+    box-shadow: 
+      inset 0 0 20px rgba(255, 255, 255, 0.3),
+      0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  
+  .bubble-1 {
+    width: 30px;
+    height: 30px;
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+  }
+  
+  .bubble-2 {
+    width: 25px;
+    height: 25px;
+    top: 30%;
+    right: 10%;
+    animation-delay: 2s;
+  }
+  
+  .bubble-3 {
+    width: 35px;
+    height: 35px;
+    top: 60%;
+    left: 10%;
+    animation-delay: 4s;
+  }
+  
+  .bubble-4 {
+    width: 20px;
+    height: 20px;
+    top: 85%;
+    right: 5%;
+    animation-delay: 6s;
+  }
+  
+  .bubble-5 {
+    width: 28px;
+    height: 28px;
+    top: 45%;
+    left: 80%;
+    animation-delay: 8s;
+  }
+  
+  @keyframes soap-bubble {
+    0% { 
+      transform: translateY(0px) scale(1) rotate(0deg); 
+      opacity: 0.3;
+      border-radius: 50%;
+    }
+    25% {
+      transform: translateY(-40px) scale(1.1) rotate(90deg);
+      opacity: 0.8;
+      border-radius: 45% 55% 55% 45%;
+    }
+    50% { 
+      transform: translateY(-80px) scale(1.2) rotate(180deg); 
+      opacity: 1;
+      border-radius: 40% 60% 60% 40%;
+    }
+    75% {
+      transform: translateY(-120px) scale(1.3) rotate(270deg);
+      opacity: 0.6;
+      border-radius: 35% 65% 65% 35%;
+    }
+    100% { 
+      transform: translateY(-160px) scale(0.1) rotate(360deg); 
+      opacity: 0;
+      border-radius: 30% 70% 70% 30%;
+    }
+  }
+    25% {
+      transform: translateY(-40px) scale(1.1) rotate(90deg);
+      opacity: 0.8;
+      border-radius: 45% 55% 55% 45%;
+    }
+    50% { 
+      transform: translateY(-80px) scale(1.2) rotate(180deg); 
+      opacity: 1;
+      border-radius: 40% 60% 60% 40%;
+    }
+    75% {
+      transform: translateY(-120px) scale(1.3) rotate(270deg);
+      opacity: 0.6;
+      border-radius: 35% 65% 65% 35%;
+    }
+    100% { 
+      transform: translateY(-160px) scale(0.1) rotate(360deg); 
+      opacity: 0;
+      border-radius: 30% 70% 70% 30%;
+    }
+  
   
   /* Fade in animations */
   .animate-fade-in-up {
@@ -287,6 +389,10 @@
   
   .animate-fade-in-up-delay {
     animation: fadeInUp 1s ease-out 0.3s both;
+  }
+  
+  .animate-fade-in-up-delay-2 {
+    animation: fadeInUp 1s ease-out 0.6s both;
   }
   
   @keyframes fadeInUp {
@@ -300,26 +406,35 @@
     }
   }
   
-  /* AGB sections */
-  .agb-section {
+  /* CTA Button */
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
   }
   
-  .info-item {
-    padding: 1rem 0;
-    border-bottom: 1px solid #e5e7eb;
-    transition: all 0.3s ease;
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
   }
   
-  .info-item:last-child {
-    border-bottom: none;
+  .btn-icon {
+    transition: transform 0.3s ease;
   }
   
-  .info-item:hover {
-    transform: translateX(8px);
+  .cta-button:hover .btn-icon {
+    transform: translateX(4px);
   }
   
-  /* Scroll animations */
+  /* Cards and sections */
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(30px);
@@ -331,8 +446,35 @@
     transform: translateY(0);
   }
   
-  .animate-on-scroll-delay {
-    transition-delay: 0.2s;
+  .mission-card, .values-card, .feature-card, .team-card, .service-link-card {
+    transition: all 0.3s ease;
+  }
+  
+  .mission-card:hover, .values-card:hover, .feature-card:hover, .team-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .check-icon {
+    color: #10b981;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  /* Bounce animation */
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
+    }
   }
 </style>
 
@@ -347,7 +489,7 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
+        entry.target.classList.add('visible');
       }
     });
   }, observerOptions);
@@ -356,6 +498,19 @@
   document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-fade-in-up-delay, .animate-fade-in-left, .animate-fade-in-right');
     animatedElements.forEach(el => observer.observe(el));
+    
+      // Observe all elements with animate-on-scroll classes
+  const scrollElements = document.querySelectorAll('.animate-on-scroll');
+  scrollElements.forEach(el => observer.observe(el));
+  
+  // Show all elements immediately as fallback
+  setTimeout(() => {
+    scrollElements.forEach(el => {
+      if (!el.classList.contains('visible')) {
+        el.classList.add('visible');
+      }
+    });
+  }, 100);
     
     // Add hover effects
     const cards = document.querySelectorAll('.service-card, .info-card');
@@ -370,24 +525,55 @@
     });
   });
   
-  // Background slider functionality
+    // Background slider functionality with dynamic image loading
   function initBackgroundSlider() {
-    const slides = document.querySelectorAll('.hero-bg-slide');
-    if (slides.length === 0) return;
+    const sliderContainer = document.getElementById('heroSlider');
+    if (!sliderContainer) return;
     
-    // Enhanced random selection with timestamp for more uniqueness
-    const timestamp = Date.now();
-    const randomSeed = (timestamp % 1000) + Math.random();
-    let currentSlide = Math.floor(randomSeed % slides.length);
+    // Список всех картинок из папки hero-backgrounds
+    const heroImages = [
+      '{% static "main/img/hero-backgrounds/2-1536x1024.jpg" %}',
+      '{% static "main/img/hero-backgrounds/3-1536x1034.jpg" %}',
+      '{% static "main/img/hero-backgrounds/4-1536x1022.jpg" %}',
+      '{% static "main/img/hero-backgrounds/5-e1595233980884-1536x984.jpg" %}',
+      '{% static "main/img/hero-backgrounds/6-1536x1025.jpg" %}',
+      '{% static "main/img/hero-backgrounds/7-1536x1024.jpg" %}',
+      '{% static "main/img/hero-backgrounds/8-1536x1024.jpg" %}',
+      '{% static "main/img/hero-backgrounds/9-1536x586.jpg" %}',
+      '{% static "main/img/hero-backgrounds/10-1536x1024.jpg" %}',
+      '{% static "main/img/hero-backgrounds/11-1536x1024.jpg" %}',
+      '{% static "main/img/hero-backgrounds/12-1536x1024.jpg" %}',
+      '{% static "main/img/hero-backgrounds/13-1536x1024.jpg" %}'
+    ];
     
-    // Set initial state - show random slide, hide others
-    slides.forEach((slide, index) => {
-      if (index === currentSlide) {
-        slide.classList.add('active');
-      } else {
-        slide.classList.remove('active');
+    // Перемешиваем массив картинок для случайного порядка
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
       }
+      return shuffled;
+    }
+    
+    const shuffledImages = shuffleArray(heroImages);
+    
+    // Создаем элементы для каждой картинки
+    shuffledImages.forEach((imageUrl, index) => {
+      const slide = document.createElement('div');
+      slide.className = 'hero-bg-slide';
+      slide.style.backgroundImage = `url('${imageUrl}')`;
+      
+      // Первая картинка будет активной
+      if (index === 0) {
+        slide.classList.add('active');
+      }
+      
+      sliderContainer.appendChild(slide);
     });
+    
+    const slides = document.querySelectorAll('.hero-bg-slide');
+    let currentSlide = 0;
     
     function nextSlide() {
       slides[currentSlide].classList.remove('active');
