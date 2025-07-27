@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from catalog.models import Product, Booking, Category
+from catalog.models import Product, Booking, Category, Service
 from datetime import date, timedelta
 import json
 
@@ -21,8 +21,59 @@ def datenschutz(request):
     return render(request, 'main/datenschutz.html')
 
 def vermietung(request):
-    """Страница аренды оборудования"""
-    return render(request, 'main/vermietung.html')
+    """Страница аренды оборудования - теперь интерактивная"""
+    # Get all active services
+    services = Service.objects.filter(is_active=True).order_by('title')
+    
+    # Get filter parameters
+    search_query = request.GET.get('search')
+    
+    # Apply search filter
+    if search_query:
+        services = services.filter(title__icontains=search_query)
+    
+    # Pagination
+    paginator = Paginator(services, 12)  # 12 services per page
+    page_number = request.GET.get('page')
+    services_page = paginator.get_page(page_number)
+    
+    return render(request, 'main/vermietung.html', {
+        'services': services_page,
+        'search_query': search_query
+    })
+
+def service_detail(request, slug):
+    """Страница деталей услуги"""
+    service = get_object_or_404(Service, slug=slug, is_active=True)
+    
+    # Get related services
+    related_services = Service.objects.filter(is_active=True).exclude(id=service.id)[:4]
+    
+    # Get booked dates for the next 3 months
+    today = date.today()
+    end_date = today + timedelta(days=90)
+    
+    # Get confirmed and pending bookings for this service
+    bookings = Booking.objects.filter(
+        service=service,
+        start_date__gte=today,
+        end_date__lte=end_date,
+        status__in=['confirmed', 'pending']
+    ).order_by('start_date')
+    
+    # Create list of booked dates for JavaScript
+    booked_dates = []
+    for booking in bookings:
+        current_date = booking.start_date
+        while current_date <= booking.end_date:
+            booked_dates.append(current_date.strftime('%Y-%m-%d'))
+            current_date += timedelta(days=1)
+    
+    return render(request, 'main/service_detail.html', {
+        'service': service,
+        'related_services': related_services,
+        'booked_dates': json.dumps(booked_dates)
+    })
 
 def neuigkeiten(request):
     """Страница новостей"""
@@ -100,6 +151,5 @@ def product_detail(request, slug):
     return render(request, 'main/product_detail.html', {
         'product': product,
         'related_products': related_products,
-        'booked_dates': json.dumps(booked_dates),
-        'bookings': bookings
+        'booked_dates': json.dumps(booked_dates)
     })

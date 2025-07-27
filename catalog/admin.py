@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.db.models import Sum, Count
 from django.contrib.admin import AdminSite
-from .models import Product, Category, Availability, Booking
+from .models import Product, Category, Availability, Booking, Service
 
 
 @admin.register(Category)
@@ -118,6 +118,16 @@ class AvailabilityAdmin(admin.ModelAdmin):
     duration_days.short_description = 'Дней'
 
 
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ['title', 'price', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['title', 'description']
+    prepopulated_fields = {'slug': ('title',)}
+    list_editable = ['is_active', 'price']
+    date_hierarchy = 'created_at'
+
+
 # Кастомная админка для дашборда
 class PlayAndJumpAdminSite(AdminSite):
     site_header = "🎪 Play & Jump - Администрирование"
@@ -155,4 +165,5 @@ admin_site.register(Category, CategoryAdmin)
 admin_site.register(Product, ProductAdmin)
 admin_site.register(Booking, BookingAdmin)
 admin_site.register(Availability, AvailabilityAdmin)
+admin_site.register(Service, ServiceAdmin)
 

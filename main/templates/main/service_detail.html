@@ -1,0 +1,418 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ service.title }} – Play & Jump{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 relative overflow-hidden">
+  <!-- Background Image Slider -->
+  <div class="absolute inset-0">
+    <div class="hero-background-slider">
+      <div class="hero-bg-slide active" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-1.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-2.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-3.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-4.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-5.jpg' %}')"></div>
+    </div>
+    <!-- Overlay for better text readability -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80"></div>
+  </div>
+  
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">{{ service.title }}</h1>
+    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in-up-delay">
+      {{ service.description|truncatewords:30 }}
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up-delay-2">
+      <button 
+        onclick="addToCart('service', '{{ service.slug }}', '{{ service.title }}', {{ service.price }})"
+        class="cta-button primary-btn"
+      >
+        <span class="btn-content">In Warenkorb</span>
+        <span class="btn-icon">→</span>
+      </button>
+      <a href="/kontakt/" class="cta-button secondary-btn">
+        <span class="btn-content">Jetzt anfragen</span>
+        <span class="btn-icon">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Service Details Section -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <!-- Service Image and Info -->
+    <div class="space-y-8">
+      {% if service.image %}
+        <div class="relative overflow-hidden rounded-lg">
+          <img src="{{ service.image.url }}" alt="{{ service.title }}" class="w-full h-96 object-cover">
+          <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full text-lg font-semibold">
+            €{{ service.price }}
+          </div>
+        </div>
+      {% else %}
+        <div class="w-full h-96 bg-gradient-to-br from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
+          <span class="text-white text-4xl font-bold">{{ service.title|slice:":2" }}</span>
+        </div>
+      {% endif %}
+      
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h3 class="text-2xl font-bold text-gray-900 mb-4">Service Details</h3>
+        <div class="space-y-4">
+          <div class="flex justify-between">
+            <span class="text-gray-600">Preis:</span>
+            <span class="font-semibold">€{{ service.price }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Verfügbarkeit:</span>
+            <span class="text-green-600 font-semibold">Verfügbar</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-gray-600">Lieferung:</span>
+            <span class="font-semibold">Inklusive</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Calendar -->
+    <div class="space-y-8">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6">Verfügbarkeit prüfen</h3>
+        
+        <!-- Date Selection -->
+        <div class="mb-6">
+          <label for="start-date" class="block text-sm font-medium text-gray-700 mb-2">Startdatum</label>
+          <input type="date" id="start-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        </div>
+        
+        <div class="mb-6">
+          <label for="end-date" class="block text-sm font-medium text-gray-700 mb-2">Enddatum</label>
+          <input type="date" id="end-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        </div>
+        
+        <!-- Price Calculation -->
+        <div class="bg-gray-50 p-4 rounded-lg mb-6">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-gray-600">Preis pro Tag:</span>
+            <span class="font-semibold">€{{ service.price }}</span>
+          </div>
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-gray-600">Anzahl Tage:</span>
+            <span id="days-count" class="font-semibold">0</span>
+          </div>
+          <hr class="my-2">
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-bold text-gray-900">Gesamtpreis:</span>
+            <span id="total-price" class="text-lg font-bold text-blue-600">€0</span>
+          </div>
+        </div>
+        
+        <!-- Book Button -->
+        <button 
+          onclick="bookService()"
+          class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-200"
+        >
+          Jetzt buchen
+        </button>
+      </div>
+      
+      <!-- Service Description -->
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">Beschreibung</h3>
+        <p class="text-gray-600 leading-relaxed">{{ service.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Related Services -->
+{% if related_services %}
+<div class="bg-gray-50 py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Ähnliche Dienstleistungen</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for related_service in related_services %}
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+          {% if related_service.image %}
+            <img src="{{ related_service.image.url }}" alt="{{ related_service.title }}" class="w-full h-32 object-cover">
+          {% else %}
+            <div class="w-full h-32 bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+              <span class="text-white text-xl font-bold">{{ related_service.title|slice:":2" }}</span>
+            </div>
+          {% endif %}
+          <div class="p-4">
+            <h3 class="font-semibold text-gray-900 mb-2">{{ related_service.title }}</h3>
+            <p class="text-gray-600 text-sm mb-3">{{ related_service.description|truncatewords:10 }}</p>
+            <div class="flex justify-between items-center">
+              <span class="text-blue-600 font-semibold">€{{ related_service.price }}</span>
+              <a href="{% url 'service_detail' related_service.slug %}" class="text-blue-600 hover:text-blue-800 text-sm font-semibold">
+                Details →
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<style>
+  /* Background slider styles */
+  .hero-background-slider {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  
+  .hero-bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px) brightness(0.3);
+    transform: scale(1.1);
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+  }
+  
+  .hero-bg-slide.active {
+    opacity: 1;
+  }
+  
+  /* Animation classes */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+  
+  .animate-fade-in-up-delay {
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+  
+  .animate-fade-in-up-delay-2 {
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* CTA button styles */
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .primary-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+  }
+  
+  .secondary-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .cta-button:hover .btn-icon {
+    transform: translateX(4px);
+  }
+</style>
+
+<script>
+  // Background slider functionality
+  function initBackgroundSlider() {
+    const slides = document.querySelectorAll('.hero-bg-slide');
+    if (slides.length === 0) return;
+    
+    // Enhanced random selection with timestamp for more uniqueness
+    const timestamp = Date.now();
+    const randomSeed = (timestamp % 1000) + Math.random();
+    let currentSlide = Math.floor(randomSeed % slides.length);
+    
+    // Set initial state - show random slide, hide others
+    slides.forEach((slide, index) => {
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+    
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    
+    // Change slide every 4 seconds
+    setInterval(nextSlide, 4000);
+  }
+  
+  // Date calculation functionality
+  function calculateDays() {
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+      
+      if (days > 0) {
+        document.getElementById('days-count').textContent = days;
+        const pricePerDay = {{ service.price }};
+        const totalPrice = days * pricePerDay;
+        document.getElementById('total-price').textContent = `€${totalPrice}`;
+      } else {
+        document.getElementById('days-count').textContent = '0';
+        document.getElementById('total-price').textContent = '€0';
+      }
+    }
+  }
+  
+  // Add to cart functionality
+  function addToCart(type, slug, title, price) {
+    // Get existing cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    
+    // Add item to cart
+    const cartItem = {
+      type: type,
+      slug: slug,
+      title: title,
+      price: price,
+      quantity: 1,
+      addedAt: new Date().toISOString()
+    };
+    
+    // Check if item already exists
+    const existingItemIndex = cart.findIndex(item => 
+      item.type === type && item.slug === slug
+    );
+    
+    if (existingItemIndex !== -1) {
+      cart[existingItemIndex].quantity += 1;
+    } else {
+      cart.push(cartItem);
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Show success message
+    showNotification(`${title} wurde zum Warenkorb hinzugefügt!`);
+  }
+  
+  // Book service functionality
+  function bookService() {
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    
+    if (!startDate || !endDate) {
+      showNotification('Bitte wählen Sie Start- und Enddatum aus.', 'error');
+      return;
+    }
+    
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+    
+    if (days <= 0) {
+      showNotification('Enddatum muss nach dem Startdatum liegen.', 'error');
+      return;
+    }
+    
+    // Add to cart with booking dates
+    const cartItem = {
+      type: 'service',
+      slug: '{{ service.slug }}',
+      title: '{{ service.title }}',
+      price: {{ service.price }},
+      quantity: 1,
+      startDate: startDate,
+      endDate: endDate,
+      days: days,
+      totalPrice: days * {{ service.price }},
+      addedAt: new Date().toISOString()
+    };
+    
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.push(cartItem);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    showNotification('Buchung wurde zum Warenkorb hinzugefügt!');
+    
+    // Redirect to cart
+    setTimeout(() => {
+      window.location.href = '/cart/';
+    }, 1500);
+  }
+  
+  // Show notification
+  function showNotification(message, type = 'success') {
+    // Create notification element
+    const notification = document.createElement('div');
+    const bgColor = type === 'error' ? 'bg-red-500' : 'bg-green-500';
+    notification.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+      notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+      notification.style.transform = 'translateX(full)';
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 3000);
+  }
+  
+  // Initialize everything when DOM is loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    initBackgroundSlider();
+    
+    // Add event listeners for date inputs
+    document.getElementById('start-date').addEventListener('change', calculateDays);
+    document.getElementById('end-date').addEventListener('change', calculateDays);
+    
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('start-date').min = today;
+    document.getElementById('end-date').min = today;
+  });
+</script>
+{% endblock %} 
