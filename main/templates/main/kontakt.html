@@ -6,6 +6,19 @@
 {% block content %}
 <!-- Hero Section with Motion Design -->
 <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 relative overflow-hidden">
+  <!-- Background Image Slider -->
+  <div class="absolute inset-0">
+    <div class="hero-background-slider">
+      <div class="hero-bg-slide active" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-1.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-2.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-3.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-4.jpg' %}')"></div>
+      <div class="hero-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-5.jpg' %}')"></div>
+    </div>
+    <!-- Overlay for better text readability -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80"></div>
+  </div>
+  
   <!-- Animated background elements -->
   <div class="absolute inset-0">
     <div class="floating-shapes">
@@ -351,6 +364,29 @@
     opacity: 1;
     transform: translateY(0);
   }
+  
+  /* Background slider styles */
+  .hero-background-slider {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  
+  .hero-bg-slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px) brightness(0.3);
+    transform: scale(1.1);
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+  }
+  
+  .hero-bg-slide.active {
+    opacity: 1;
+  }
 </style>
 
 <!-- JavaScript for Motion Design -->
@@ -371,6 +407,9 @@
   
   // Observe all elements with animate-on-scroll classes
   document.addEventListener('DOMContentLoaded', () => {
+    // Initialize background slider
+    initBackgroundSlider();
+    
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => observer.observe(el));
     
@@ -396,6 +435,35 @@
       });
     }
   });
+  
+  // Background slider functionality
+  function initBackgroundSlider() {
+    const slides = document.querySelectorAll('.hero-bg-slide');
+    if (slides.length === 0) return;
+    
+    // Enhanced random selection with timestamp for more uniqueness
+    const timestamp = Date.now();
+    const randomSeed = (timestamp % 1000) + Math.random();
+    let currentSlide = Math.floor(randomSeed % slides.length);
+    
+    // Set initial state - show random slide, hide others
+    slides.forEach((slide, index) => {
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+    
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    
+    // Change slide every 4 seconds
+    setInterval(nextSlide, 4000);
+  }
 </script>
 {% endblock %}
         
