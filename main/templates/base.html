@@ -46,11 +46,11 @@
       <!-- Background Image Slider -->
       <div class="absolute inset-0">
         <div class="footer-background-slider">
-          <div class="footer-bg-slide active" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-1.jpg' %}')"></div>
-          <div class="footer-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-2.jpg' %}')"></div>
-          <div class="footer-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-3.jpg' %}')"></div>
-          <div class="footer-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-4.jpg' %}')"></div>
-          <div class="footer-bg-slide" style="background-image: url('{% static 'main/img/hero-backgrounds/hero-bg-5.jpg' %}')"></div>
+          <img src="{% static 'main/img/hero-backgrounds/hero-bg-1.jpg' %}" alt="" class="footer-bg-slide active">
+          <img src="{% static 'main/img/hero-backgrounds/hero-bg-2.jpg' %}" alt="" class="footer-bg-slide">
+          <img src="{% static 'main/img/hero-backgrounds/hero-bg-3.jpg' %}" alt="" class="footer-bg-slide">
+          <img src="{% static 'main/img/hero-backgrounds/hero-bg-4.jpg' %}" alt="" class="footer-bg-slide">
+          <img src="{% static 'main/img/hero-backgrounds/hero-bg-5.jpg' %}" alt="" class="footer-bg-slide">
         </div>
         <!-- Overlay for better text readability -->
         <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-gray-800/90"></div>
@@ -114,9 +114,10 @@
       body > footer .footer-bg-slide {
         position: absolute !important;
         inset: 0 !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
         filter: blur(12px) brightness(0.4) !important;
         transform: scale(1.2) !important;
         opacity: 0 !important;
@@ -147,6 +148,15 @@
       
       body > footer .shape {
         display: none !important;
+      }
+      
+      /* Debug styles - make footer background more visible */
+      body > footer {
+        min-height: 200px !important;
+      }
+      
+      body > footer .footer-background-slider {
+        background: rgba(255, 0, 0, 0.1) !important; /* Red tint for debugging */
       }
     </style>
 </body>
