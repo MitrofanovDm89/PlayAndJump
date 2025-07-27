@@ -5,7 +5,7 @@
 
 {% block content %}
 <!-- Hero Section with Motion Design -->
-<div class="bg-gradient-to-r from-gray-600 to-gray-800 text-white py-20 relative overflow-hidden">
+<div class="bg-gradient-to-r from-gray-600 to-gray-800 text-white py-20 relative overflow-hidden agb-page">
   <!-- Animated background elements -->
   <div class="absolute inset-0">
     <div class="floating-shapes">
@@ -192,22 +192,22 @@
 
 <!-- Custom CSS for Motion Design -->
 <style>
-  /* Floating shapes animation */
-  .floating-shapes {
+  /* Floating shapes animation - SPECIFIC TO AGB PAGE ONLY */
+  .agb-page .floating-shapes {
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
   }
   
-  .shape {
+  .agb-page .shape {
     position: absolute;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.1);
     animation: float 6s ease-in-out infinite;
   }
   
-  .shape-1 {
+  .agb-page .shape-1 {
     width: 80px;
     height: 80px;
     top: 20%;
@@ -215,7 +215,7 @@
     animation-delay: 0s;
   }
   
-  .shape-2 {
+  .agb-page .shape-2 {
     width: 120px;
     height: 120px;
     top: 60%;
@@ -223,7 +223,7 @@
     animation-delay: 2s;
   }
   
-  .shape-3 {
+  .agb-page .shape-3 {
     width: 60px;
     height: 60px;
     top: 40%;
@@ -231,7 +231,7 @@
     animation-delay: 4s;
   }
   
-  .shape-4 {
+  .agb-page .shape-4 {
     width: 100px;
     height: 100px;
     bottom: 20%;
